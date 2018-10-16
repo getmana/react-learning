@@ -1,0 +1,1 @@
+export { push, replace } from 'connected-react-router'

@@ -1,0 +1,25 @@
+# Destination folder
+dist/
+
+# Node modules
+node_modules/
+
+# dotenv environment variables file
+.env
+
+# Parcel's cache
+.cache/
+
+# Package manager's logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# next.js build output
+.next

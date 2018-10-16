@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"experimentalDecorators": true,
+		"target": "es2018",
+		"checkJs": false,
+		"baseUrl": "./",
+		"paths": {
+			"~/*": ["src/*"],
+			"store/*": ["src/store/*"],
+			"models/*": ["src/store/models/*"],
+			"components/*": ["src/components/*"],
+			"images/*": ["src/images/*"],
+			"pages/*": ["src/pages/*"],
+			"services": ["src/services/index"],
+			"constants": ["src/constants/index"],
+			"decorators": ["src/decorators/index"],
+			"helpers": ["src/helpers/index"]
+	  	}
+	},
+	"include": [
+		"src"
+	]
+}
