@@ -70,7 +70,7 @@ module.exports = {
 		"array-element-newline": "off",
 
 		// This rule reports line terminators around semicolons.
-		"semi-style": ["error", "first"],
+		// "semi-style": ["error", "first"],
 
 		// This rule enforces consistent line breaks inside parentheses of function parameters or arguments.
 		////"function-paren-newline": ["warn", { "multiline": true, "minItems": 6 }],
@@ -190,7 +190,7 @@ module.exports = {
 		"no-multiple-empty-lines": ["warn", { "max": 1, "maxBOF": 1, "maxEOF": 1 }],
 		
 		// Без точек с запятой.
-		"semi": ["error", "never"],
+		// "semi": ["error", "never"],
 		
 		// disallow trailing commas in object literals
 		"comma-dangle": ["warn", {
@@ -228,7 +228,7 @@ module.exports = {
 		"no-extra-boolean-cast": "error",
 		
 		// disallow unnecessary semicolons
-		"no-extra-semi": "error",              
+		// "no-extra-semi": "error",              
 
 		// disallow invalid regular expression strings in the RegExp constructor
 		"no-invalid-regexp": "error",   
@@ -575,7 +575,7 @@ module.exports = {
 		"no-warning-comments": "off",       
 
 		// require a space after a semi-colon
-		"semi-spacing": "off",
+		// "semi-spacing": "off",
 
 		// requires to declare all vars on top of their containing scope (off by default)
 		"vars-on-top": "off",              
