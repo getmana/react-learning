@@ -13,14 +13,15 @@ const ButtonThemed = styled.button`
 	border-radius: 3px;
     padding: 0.4em 1em;
     margin: 10px 0;
-	color: ${props => props.theme[`${props.btnType}`]};
-    border: 2px solid ${props => props.theme[`${props.btnType}`]};
+	color: ${props => props.disabled ? props.theme.unactive : props.theme[`${props.type}`]};
+    border: 2px solid ${props => props.disabled ? props.theme.unactive : props.theme[`${props.type}`]};
     width: 100%;
+    outline: none;
 
     :hover {
-        cursor: ${props => props.btnType === 'unactive' ? 'default' : 'pointer'};
-        color: ${props => props.btnType === 'unactive' ? props.theme.unactive : '#fff'};
-        background: ${props => props.btnType === 'unactive' ? 'transparent' : props.theme[`${props.btnType}`]};
+        cursor: ${props => props.disabled ? 'default' : 'pointer'};
+        color: ${props => props.disabled ? props.theme.unactive : '#fff'};
+        background: ${props => props.disabled ? 'transparent' : props.theme[`${props.type}`]};
       }
 `;
 
@@ -34,10 +35,10 @@ const SpinnerBox = styled.div`
       opacity: 0.7;
 `;
 
-const Button = ({ children, btnType, loading, onClick, }) => {
+const Button = ({ children, type, loading, onClick, disabled, }) => {
 	return (
 		<ButtonBox>
-			<ButtonThemed btnType={btnType} onClick={onClick}>{children}</ButtonThemed>
+			<ButtonThemed type={type} disabled={disabled} onClick={onClick}>{children}</ButtonThemed>
 			<SpinnerBox>
 				{
 					loading && <Spinner size="12px" />
@@ -50,7 +51,9 @@ const Button = ({ children, btnType, loading, onClick, }) => {
 export default Button;
 
 Button.propTypes = {
-	btnType: PropTypes.string.isRequired,
+	type: PropTypes.oneOf([ 'primary', 'secondary' ]),
 	onClick: PropTypes.func,
 	loading: PropTypes.bool,
+	disabled: PropTypes.bool,
+	children: PropTypes.string,
 }

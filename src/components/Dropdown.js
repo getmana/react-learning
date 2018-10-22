@@ -34,7 +34,7 @@ class Dropdown extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			color: props.defaultProp,
+			currentValue: props.defaultProp,
 			isOpen: false,
 			style: portalInitStyle,
 		};
@@ -64,14 +64,14 @@ class Dropdown extends Component {
 	selectVariant = (index) => {
 		const { list, } = this.props;
 		this.setState({
-			color: list[index],
+			currentValue: list[index],
 		})
 		this.closeDropdown();
 	}
 
 	render() {
 		const { label, list, } = this.props;
-		const { isOpen, color, style, } = this.state;
+		const { isOpen, currentValue, style, } = this.state;
 		const openedIcon = 'keyboard_arrow_up';
 		const closedIcon = 'keyboard_arrow_down';
 
@@ -79,7 +79,7 @@ class Dropdown extends Component {
 			<DropdownThemed>
 				<Label label={label} />
 				<InputBox>
-					<InputElement value={color || 'Select'} type="text" openDropdown={this.openDropdown} onChange={this.handleChange} />
+					<InputElement value={currentValue || 'Select'} type="text" onOpenDropdown={this.openDropdown} onChange={this.handleChange} />
 					<Icon className="material-icons">
 						{
 							isOpen ? openedIcon : closedIcon
@@ -88,7 +88,7 @@ class Dropdown extends Component {
 				</InputBox>
 				{isOpen && (
 					<Portal portalStyle={style} onClose={this.closeDropdown}>
-						<DropdownList list={list} selectVariant={this.selectVariant} />
+						<DropdownList list={list} onSelectVariant={this.selectVariant} />
 					</Portal>
 				)}
 			</DropdownThemed>

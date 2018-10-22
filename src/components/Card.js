@@ -9,22 +9,10 @@ const CardThemed = styled.div`
     margin: 10px;
 `;
 
-const CardTitle = styled.div`
-    color: #fff;
-    background-color: ${props => props.theme.primary};
-    padding: 10px;
-`;
-
-const CardContent = styled.div`
-    padding: 20px;
-    line-height: 1.5em;
-`;
-
-const Card = ({ title, content, }) => {
+const Card = ({ children, }) => {
 	return (
 		<CardThemed>
-			<CardTitle>{title}</CardTitle>
-			<CardContent>{content}</CardContent>
+			{children}
 		</CardThemed>
 	)
 }
@@ -32,6 +20,8 @@ const Card = ({ title, content, }) => {
 export default Card;
 
 Card.propTypes = {
-	title: PropTypes.string.isRequired,
-	content: PropTypes.string.isRequired,
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node
+	]).isRequired,
 }

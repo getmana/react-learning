@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import v4 from 'uuid-v4';
 
 const TableThemed = styled.table`
     border: 2px solid ${props => props.theme.primary};
@@ -39,8 +38,8 @@ const Table = ({ caption, tableContent, }) => {
 			<thead>
 				<TrThemed>
 					{
-						Object.keys(tableContent[0]).map((item) => {
-							return <ThThemed key={v4()}>{item}</ThThemed>
+						Object.keys(tableContent[0]).map((item, index) => {
+							return <ThThemed key={index}>{item}</ThThemed>
 						})
 					}
 				</TrThemed>
@@ -48,10 +47,10 @@ const Table = ({ caption, tableContent, }) => {
 			<tbody>
 				{
 					tableContent.map((element) => {
-						return <TrThemed key={v4()}>
+						return <TrThemed key={element.id}>
 							{
-								Object.values(element).map((item) => {
-									return <TdThemed key={v4()}>{item}</TdThemed>
+								Object.values(element).map((item, index) => {
+									return <TdThemed key={element.id + index + 1}>{item}</TdThemed>
 								})
 							}
 						</TrThemed>

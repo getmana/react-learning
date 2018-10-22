@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, } from 'react-router-dom';
-import Logo from '../images/react-logo.png';
+import PropTypes from 'prop-types';
 
 const HeaderThemed = styled.header`
     color: #fff;
@@ -11,24 +10,19 @@ const HeaderThemed = styled.header`
     display: flex;
 `;
 
-const HeaderTitle = styled.h1`
-    font-size: 36px;
-    padding-top: 5px;
-`;
-
-const LogoImage = styled.img`
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-`;
-
-const Header = () => {
+const Header = ({ children, }) => {
 	return (
 		<HeaderThemed>
-			<Link to="#"><LogoImage src={Logo} /></Link>
-			<HeaderTitle>Hello from React</HeaderTitle>
+			{children}
 		</HeaderThemed>
 	)
 }
 
 export default Header;
+
+Header.propTypes = {
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node
+	]).isRequired,
+}

@@ -16,6 +16,7 @@ const SidebarThemed = styled.aside`
 class Sidebar extends Component {
 	state = {
 		loading: false,
+		disabled: true,
 	}
 
 	handleClick = () => {
@@ -25,17 +26,18 @@ class Sidebar extends Component {
 	}
 
 	render() {
-		const { loading, } = this.state;
+		const { loading, disabled, } = this.state;
 		const { onOpenModal, } = this.props;
 
 		return (
 			<SidebarThemed>
 				<Title>Change the Theme</Title>
-				<Button btnType="primary" onClick={onOpenModal}>Change Theme</Button>
+				<Button type="primary" onClick={onOpenModal}>Change Theme</Button>
 				<Title>Nice Buttons</Title>
-				<Button btnType="primary" loading={loading} onClick={this.handleClick}>I'm Button</Button>
-				<Button btnType="secondary">I'm Secondary Button</Button>
-				<Button btnType="unactive">I'm Unactive Button</Button>
+				<Button>I'm Default Button</Button>
+				<Button type="primary" loading={loading} onClick={this.handleClick}>I'm Primary Button</Button>
+				<Button type="secondary" >I'm Secondary Button</Button>
+				<Button type="secondary" disabled={disabled}>I'm Disabled Button</Button>
 				<Title>Nice Spinner</Title>
 				<Spinner size="26px" />
 			</SidebarThemed>

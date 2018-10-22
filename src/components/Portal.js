@@ -28,4 +28,8 @@ Portal.propTypes = {
 		PropTypes.string,
 		PropTypes.number,
 	])).isRequired,
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node
+	]).isRequired,
 }

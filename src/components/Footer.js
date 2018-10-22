@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const FooterThemed = styled.footer`
     padding: 1vh 0;
@@ -8,12 +9,19 @@ const FooterThemed = styled.footer`
     text-align: center;
 `;
 
-const Footer = () => {
+const Footer = ({ children, }) => {
 	return (
 		<FooterThemed>
-			<p>I'm a small footer &copy; 2018</p>
+			{children}
 		</FooterThemed>
 	)
 }
 
 export default Footer;
+
+Footer.propTypes = {
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node
+	]).isRequired,
+}

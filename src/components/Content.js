@@ -19,6 +19,17 @@ const CardContainer = styled.section`
     flex-wrap: wrap;
 `;
 
+const CardTitle = styled.div`
+    color: #fff;
+    background-color: ${props => props.theme.primary};
+    padding: 10px;
+`;
+
+const CardContent = styled.div`
+    padding: 20px;
+    line-height: 1.5em;
+`;
+
 const InputContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -32,7 +43,12 @@ const Content = () => {
 			<CardContainer>
 				{
 					cards.map((card) => {
-						return <Card title={card.title} content={card.content} key={card.id} />
+						return (
+							<Card key={card.id}>
+								<CardTitle>{card.title}</CardTitle>
+								<CardContent>{card.content}</CardContent>
+							</Card>
+						)
 					})
 				}
 			</CardContainer>

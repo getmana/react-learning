@@ -735,7 +735,7 @@ module.exports = {
 		"react/jsx-uses-vars": 1,
 		"react/no-multi-comp": "off",
 		"react/no-unknown-property": "off",
-		"react/prop-types": "off",
+		"react/prop-types": 2,
 		"react/react-in-jsx-scope": "off",
 		"react/self-closing-comp": 1,
 		"react/wrap-multilines": "off",

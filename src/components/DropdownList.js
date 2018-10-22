@@ -19,12 +19,12 @@ const ItemThemed = styled.li`
     }
 `;
 
-const DropdownList = ({ list, selectVariant, }) => {
+const DropdownList = ({ list, onSelectVariant, }) => {
 	return (
 		<ListThemed>
 			{
 				list.map((item, index) => {
-					return <ItemThemed key={index} onClick={() => selectVariant(index)}>
+					return <ItemThemed key={index} onClick={() => onSelectVariant(index)}>
 						{item}
 					</ItemThemed>
 				})
@@ -36,6 +36,6 @@ const DropdownList = ({ list, selectVariant, }) => {
 export default DropdownList;
 
 DropdownList.propTypes = {
-	selectVariant: PropTypes.func.isRequired,
+	onSelectVariant: PropTypes.func.isRequired,
 	list: PropTypes.arrayOf(PropTypes.string).isRequired,
 }

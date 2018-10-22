@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -13,17 +13,27 @@ const InputThemed = styled.input`
     width: 100%;
 `;
 
-const InputElement = ({ type, value, onChange, openDropdown, }) => {
-	return (
-		<InputThemed
-			type={type}
-			value={value}
-			onChange={onChange}
-			onClick={openDropdown
-				? (e) => openDropdown(e.target.getBoundingClientRect())
-				: null}
-		/>
-	)
+class InputElement extends Component {
+	handleClick = (e) => {
+		const { onOpenDropdown, } = this.props;
+
+		if (onOpenDropdown) {
+			onOpenDropdown(e.target.getBoundingClientRect())
+		}
+	}
+
+	render() {
+		const { type, value, onChange, } = this.props;
+
+		return (
+			<InputThemed
+				type={type}
+				value={value}
+				onChange={onChange}
+				onClick={this.handleClick}
+			/>
+		)
+	}
 }
 
 export default InputElement;
@@ -31,6 +41,6 @@ export default InputElement;
 InputElement.propTypes = {
 	type: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
-	openDropdown: PropTypes.func,
+	onOpenDropdown: PropTypes.func,
 	value: PropTypes.string,
 }
