@@ -6,22 +6,23 @@ import Spinner from './Spinner';
 const ButtonBox = styled.div`
     position: relative;
     width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
 `;
 
 const ButtonThemed = styled.button`
 	background: transparent;
 	border-radius: 3px;
     padding: 0.4em 1em;
-    margin: 10px 0;
-	color: ${props => props.disabled ? props.theme.unactive : props.theme[`${props.type}`]};
-    border: 2px solid ${props => props.disabled ? props.theme.unactive : props.theme[`${props.type}`]};
+	color: ${props => props.disabled ? props.theme.unactive : props.theme[`${props.styles}`]};
+    border: 2px solid ${props => props.disabled ? props.theme.unactive : props.theme[`${props.styles}`]};
     width: 100%;
     outline: none;
 
     :hover {
         cursor: ${props => props.disabled ? 'default' : 'pointer'};
         color: ${props => props.disabled ? props.theme.unactive : '#fff'};
-        background: ${props => props.disabled ? 'transparent' : props.theme[`${props.type}`]};
+        background: ${props => props.disabled ? 'transparent' : props.theme[`${props.styles}`]};
       }
 `;
 
@@ -33,12 +34,20 @@ const SpinnerBox = styled.div`
       text-align: center;
       background-color: ${props => props.theme.secondaryBg};
       opacity: 0.7;
+      margin: 0 10px;
 `;
 
-const Button = ({ children, type, loading, onClick, disabled, }) => {
+const Button = ({ children, styles, type, loading, onClick, disabled, }) => {
 	return (
 		<ButtonBox>
-			<ButtonThemed type={type} disabled={disabled} onClick={onClick}>{children}</ButtonThemed>
+			<ButtonThemed
+				type={type}
+				styles={styles}
+				disabled={disabled}
+				onClick={onClick}
+			>
+				{children}
+			</ButtonThemed>
 			<SpinnerBox>
 				{
 					loading && <Spinner size="12px" />
@@ -51,7 +60,8 @@ const Button = ({ children, type, loading, onClick, disabled, }) => {
 export default Button;
 
 Button.propTypes = {
-	type: PropTypes.oneOf([ 'primary', 'secondary' ]),
+	styles: PropTypes.oneOf([ 'primary', 'secondary' ]),
+	type: PropTypes.string,
 	onClick: PropTypes.func,
 	loading: PropTypes.bool,
 	disabled: PropTypes.bool,

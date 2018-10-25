@@ -57,7 +57,7 @@ const SelectThemeModal = ({ theme, selectTheme, onClose, }) => {
 						<span>Orange</span>
 					</LabelThemed>
 				</form>
-				<Button type="primary" onClick={onClose}>ok</Button>
+				<Button type="button" styles="primary" onClick={onClose}>ok</Button>
 			</ModalContent>
 		</ModalThemed>
 	)

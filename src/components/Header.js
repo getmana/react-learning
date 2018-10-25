@@ -7,7 +7,8 @@ const HeaderThemed = styled.header`
     background-color: ${props => props.theme.primary};
     justify-content: center;
     padding: 5vh 0;
-    display: flex;
+	display: flex;
+	position: relative;
 `;
 
 const Header = ({ children, }) => {

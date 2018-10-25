@@ -6,11 +6,15 @@ const InputThemed = styled.input`
     border: none;
     outline: none;
     padding: 0.4em 1em;
-    border-bottom: 2px solid ${props => props.theme.primary};
-    color: ${props => props.theme.primary};
+    border-bottom: 2px solid ${props => props.disabled ? props.theme.unactive : props.theme.primary};
+    color: ${props => props.disabled ? props.theme.unactive : props.theme.primary};
     background-color: transparent;
     box-sizing: border-box;
-    width: 100%;
+	width: 100%;
+	
+	::placeholder {
+		color: ${props => props.theme.primary};
+	}
 `;
 
 class InputElement extends Component {
@@ -23,14 +27,17 @@ class InputElement extends Component {
 	}
 
 	render() {
-		const { type, value, onChange, } = this.props;
+		const { type, value, onChange, placeholder, input, disabled, } = this.props;
 
 		return (
 			<InputThemed
+				disabled={disabled}
 				type={type}
 				value={value}
+				placeholder={placeholder}
 				onChange={onChange}
 				onClick={this.handleClick}
+				{...input}
 			/>
 		)
 	}
@@ -43,4 +50,5 @@ InputElement.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	onOpenDropdown: PropTypes.func,
 	value: PropTypes.string,
+	placeholder: PropTypes.string,
 }

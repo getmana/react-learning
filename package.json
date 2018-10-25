@@ -16,6 +16,7 @@
 		"axios": "^0.18.0",
 		"connected-react-router": "^4.4.1",
 		"fast-async": "^6.3.8",
+		"history": "^4.7.2",
 		"prop-types": "^15.6.2",
 		"react": "^16.5.2",
 		"react-dom": "^16.5.0",
@@ -23,6 +24,7 @@
 		"react-router-dom": "^4.3.1",
 		"redux": "^4.0.0",
 		"redux-devtools-extension": "^2.13.5",
+		"redux-form": "^7.4.2",
 		"redux-saga": "^0.16.0",
 		"reset-css": "^4.0.1",
 		"styled-components": "^4.0.0"

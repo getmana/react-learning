@@ -32,12 +32,12 @@ class Sidebar extends Component {
 		return (
 			<SidebarThemed>
 				<Title>Change the Theme</Title>
-				<Button type="primary" onClick={onOpenModal}>Change Theme</Button>
+				<Button type="button" styles="primary" onClick={onOpenModal}>Change Theme</Button>
 				<Title>Nice Buttons</Title>
 				<Button>I'm Default Button</Button>
-				<Button type="primary" loading={loading} onClick={this.handleClick}>I'm Primary Button</Button>
-				<Button type="secondary" >I'm Secondary Button</Button>
-				<Button type="secondary" disabled={disabled}>I'm Disabled Button</Button>
+				<Button type="button" styles="primary" loading={loading} onClick={this.handleClick}>I'm Primary Button</Button>
+				<Button type="button" styles="secondary" >I'm Secondary Button</Button>
+				<Button type="button" styles="secondary" disabled={disabled}>I'm Disabled Button</Button>
 				<Title>Nice Spinner</Title>
 				<Spinner size="26px" />
 			</SidebarThemed>
