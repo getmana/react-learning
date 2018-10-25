@@ -1,9 +1,11 @@
-import React, { Component, } from 'react';
-import { Link, } from 'react-router-dom';
+import React, { Component, Fragment, } from 'react';
+import { Link, Route, Switch, } from 'react-router-dom';
 import styled, { ThemeProvider, } from 'styled-components';
 import Logo from '../images/react-logo.png';
 import { themeIndigo, themeOrange, } from '../configs/themes';
 import { Header, Footer, MainSection, Portal, SelectThemeModal, Sidebar, Content, } from '../components';
+import Login from './Login';
+import Account from './Account';
 
 const Page = styled.div`
 	display: flex;
@@ -22,6 +24,20 @@ const LogoImage = styled.img`
     width: 50px;
     height: 50px;
     margin-right: 10px;
+`;
+
+const LinkBox = styled.div`
+	position: absolute;
+	padding: 15px 20px;
+	right: 0;
+
+	a {
+		color: #fff;
+	}
+
+	@media screen and (max-width: 480px) {
+		position: relative;
+	}
 `;
 
 const portalInitStyle = {
@@ -71,12 +87,27 @@ class App extends Component {
 			<ThemeProvider theme={themeName}>
 				<Page>
 					<Header>
-						<Link to="#"><LogoImage src={Logo} /></Link>
+						<Link to="/"><LogoImage src={Logo} /></Link>
 						<HeaderTitle>Hello from React</HeaderTitle>
+						<LinkBox>
+							<Link to="login">login</Link>
+						</LinkBox>
 					</Header>
 					<MainSection>
-						<Sidebar onOpenModal={this.openModal} />
-						<Content />
+						<Switch>
+							<Route
+								exact
+								path="/"
+								render={() => (
+									<Fragment>
+										<Sidebar onOpenModal={this.openModal} />
+										<Content />
+									</Fragment>
+								)}
+							/>
+							<Route path="/login" render={() => <Login />} />
+							<Route path="/account" render={() => <Account />} />
+						</Switch>
 					</MainSection>
 					<Footer>
 						<p>I'm a small footer &copy; 2018</p>

@@ -1,6 +1,6 @@
 import { fork, } from 'redux-saga/effects'
-import app from './app/sagas'
+import watchLoginSaga from './user/sagas'
 
 export default function* rootSaga() {
-	yield fork(app)
+	yield fork(watchLoginSaga);
 }

@@ -7,10 +7,9 @@ import InputElement from './InputElement';
 const InputComponent = styled.div`
 	display: flex;
 	flex-direction: column;
-	max-width: 300px;
-	padding: 10px;
+	padding: 20px 10px;
 	box-sizing: border-box;
-	color: ${props => props.theme.primary};
+	color: ${props => props.disabled ? props.theme.unactive : props.theme.primary};
 `;
 
 const InputBox = styled.div`
@@ -60,40 +59,49 @@ const TooltipThemed = styled.div`
 
 const ErrorMessage = styled.div`
 	color: red;
+	font-size: 12px;
 `;
 
 class Input extends Component {
-	state = {
-		inputValue: '',
-	}
-
-	handleChange = (e) => {
-		this.setState({
-			inputValue: e.target.value,
-		})
-	}
-
 	render() {
-		const { type, label, icon, errorMessage, } = this.props;
-		const { inputValue, } = this.state;
+		const {
+			type,
+			label,
+			icon,
+			placeholder,
+			input,
+			meta,
+			disabled,
+			currentValue,
+			onChange,
+		} = this.props;
+		const { touched, error, warning, } = meta || {};
 
 		return (
-			<InputComponent>
-				<Label label={label} />
+			<InputComponent disabled={disabled}>
+				<Label label={label} disabled={disabled} />
 				<InputBox>
-					<InputElement type={type} value={inputValue} onChange={this.handleChange} />
+					<InputElement
+						disabled={disabled}
+						type={type}
+						value={currentValue}
+						placeholder={placeholder}
+						onChange={onChange}
+						{...input}
+					/>
 					{
 						icon &&
 							<IconBox>
 								<IconThemed className="material-icons">{icon}</IconThemed>
-								<TooltipThemed className="tooltip">{inputValue}</TooltipThemed>
+								<TooltipThemed className="tooltip">{currentValue}</TooltipThemed>
 							</IconBox>
 					}
 
 				</InputBox>
 				{
-					errorMessage &&
-						<ErrorMessage>{errorMessage}</ErrorMessage>
+					touched &&
+					((error && <ErrorMessage>{error}</ErrorMessage>) ||
+						(warning && <ErrorMessage>{warning}</ErrorMessage>))
 				}
 			</InputComponent>
 		)
@@ -107,4 +115,5 @@ Input.propTypes = {
 	type: PropTypes.string.isRequired,
 	icon: PropTypes.string,
 	errorMessage: PropTypes.string,
+	placeholder: PropTypes.string,
 }

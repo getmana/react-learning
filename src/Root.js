@@ -1,11 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider, } from 'react-redux'
-import store from './store'
-import { Router, } from './components'
-import { App, } from './pages'
-import routingHistory from './store/routingHistory'
-import 'reset-css'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider, } from 'react-redux';
+import store from './store';
+import { Router, } from './components';
+import { App, } from './pages';
+import routingHistory from './store/routingHistory';
+import 'reset-css';
 
 function Root() {
 	return (
@@ -17,4 +17,4 @@ function Root() {
 	)
 }
 
-ReactDOM.render(<Root />, document.getElementById('root'))
+ReactDOM.render(<Root />, document.getElementById('root'));

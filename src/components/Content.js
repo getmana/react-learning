@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, } from 'react';
 import styled from 'styled-components';
 import PageTitle from './PageTitle';
 import Title from './Title';
@@ -32,36 +32,59 @@ const CardContent = styled.div`
 
 const InputContainer = styled.div`
     display: flex;
-    flex-direction: column;
+	flex-direction: column;
+	max-width: 300px;
 `;
 
-const Content = () => {
-	return (
-		<ContentThemed>
-			<PageTitle>Here is content</PageTitle>
-			<Title>Cards Section</Title>
-			<CardContainer>
-				{
-					cards.map((card) => {
-						return (
-							<Card key={card.id}>
-								<CardTitle>{card.title}</CardTitle>
-								<CardContent>{card.content}</CardContent>
-							</Card>
-						)
-					})
-				}
-			</CardContainer>
-			<Title>Inputs Section</Title>
-			<InputContainer>
-				<Input type="text" label="Name:" />
-				<Input type="password" icon="remove_red_eye" />
-				<Dropdown label="Select color" defaultProp="orange" list={list} />
-			</InputContainer>
-			<Title>Table Section</Title>
-			<Table caption="Mock Table" tableContent={tableContent} />
-		</ContentThemed>
-	)
+class Content extends Component {
+	state = {
+		color: 'orange',
+		name: '',
+		password: '',
+	}
+
+	handleChange = (name, value) => {
+		this.setState({
+			[name]: value,
+		})
+	}
+
+	selectColor = (color) => {
+		this.setState({
+			color,
+		})
+	}
+
+	render() {
+		const { name, password, } = this.state;
+
+		return (
+			<ContentThemed>
+				<PageTitle>Here is content</PageTitle>
+				<Title>Cards Section</Title>
+				<CardContainer>
+					{
+						cards.map((card) => {
+							return (
+								<Card key={card.id}>
+									<CardTitle>{card.title}</CardTitle>
+									<CardContent>{card.content}</CardContent>
+								</Card>
+							)
+						})
+					}
+				</CardContainer>
+				<Title>Inputs Section</Title>
+				<InputContainer>
+					<Input type="text" label="Name:" currentValue={name} onChange={(e) => this.handleChange('name', e.target.value)} />
+					<Input type="password" icon="remove_red_eye" currentValue={password} onChange={(e) => this.handleChange('password', e.target.value)} />
+					<Dropdown label="Select color" defaultProp="orange" list={list} onSelect={this.selectColor} />
+				</InputContainer>
+				<Title>Table Section</Title>
+				<Table caption="Mock Table" tableContent={tableContent} />
+			</ContentThemed>
+		)
+	}
 }
 
 export default Content;

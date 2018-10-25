@@ -10,7 +10,7 @@ const DropdownThemed = styled.div`
 	display: flex;
 	flex-direction: column;
 	max-width: 300px;
-	padding: 10px;
+	padding: 20px 10px;
 	box-sizing: border-box;
 	color: ${props => props.theme.primary};
 	position: relative;
@@ -21,7 +21,9 @@ const InputBox = styled.div`
 	display: flex;
 `;
 
-const Icon = styled.i``;
+const Icon = styled.i`
+	color: ${props => props.disabled ? props.theme.unactive : props.theme.primary};
+`;
 
 const portalInitStyle = {
 	position: 'fixed',
@@ -62,25 +64,32 @@ class Dropdown extends Component {
 	}
 
 	selectVariant = (index) => {
-		const { list, } = this.props;
+		const { list, onSelect, } = this.props;
 		this.setState({
 			currentValue: list[index],
 		})
+		onSelect(list[index]);
 		this.closeDropdown();
 	}
 
 	render() {
-		const { label, list, } = this.props;
+		const { label, list, disabled, } = this.props;
 		const { isOpen, currentValue, style, } = this.state;
 		const openedIcon = 'keyboard_arrow_up';
 		const closedIcon = 'keyboard_arrow_down';
 
 		return (
 			<DropdownThemed>
-				<Label label={label} />
+				<Label label={label} disabled={disabled} />
 				<InputBox>
-					<InputElement value={currentValue || 'Select'} type="text" onOpenDropdown={this.openDropdown} onChange={this.handleChange} />
-					<Icon className="material-icons">
+					<InputElement
+						value={currentValue || 'Select'}
+						type="text"
+						disabled={disabled}
+						onChange={this.handleChange}
+						onOpenDropdown={this.openDropdown}
+					/>
+					<Icon className="material-icons" disabled={disabled}>
 						{
 							isOpen ? openedIcon : closedIcon
 						}
@@ -102,4 +111,6 @@ Dropdown.propTypes = {
 	label: PropTypes.string.isRequired,
 	list: PropTypes.arrayOf(PropTypes.string).isRequired,
 	defaultProp: PropTypes.string,
+	onSelect: PropTypes.func,
+	disabled: PropTypes.bool,
 }
