@@ -1200,5 +1200,13 @@
             "id": 100,
             "rating": 1
         }
-    ]
+    ],
+	"languages": ["English", "Danish", "Italian", "Greek", "Arabic", "French", "Spanish", "Russian"],
+	"ratings": [
+		{ "label": "terrible", "value": 1 },
+		{ "label": "badly", "value": 2 },
+		{ "label": "middle", "value": 3 },
+		{ "label": "good", "value": 4 },
+		{ "label": "super", "value": 5 }
+	]
 }
