@@ -17,7 +17,8 @@ const CaptionThemed = styled.caption`
 
 const TrThemed = styled.tr`
     :hover {
-        background-color:  ${props => props.theme.secondaryBg};
+		background-color:  ${props => props.theme.secondaryBg};
+		cursor: pointer;
     }
 `;
 
@@ -31,14 +32,16 @@ const TdThemed = styled.td`
     border: 2px solid ${props => props.theme.primary};
 `;
 
-const Table = ({ caption, tableContent, }) => {
+const Table = ({ caption, tableColumns, tableContent, onClick, }) => {
 	return (
 		<TableThemed>
-			<CaptionThemed>{caption}</CaptionThemed>
+			{
+				caption && <CaptionThemed>{caption}</CaptionThemed>
+			}
 			<thead>
 				<TrThemed>
 					{
-						Object.keys(tableContent[0]).map((item, index) => {
+						tableColumns.map((item, index) => {
 							return <ThThemed key={index}>{item}</ThThemed>
 						})
 					}
@@ -47,11 +50,12 @@ const Table = ({ caption, tableContent, }) => {
 			<tbody>
 				{
 					tableContent.map((element) => {
-						return <TrThemed key={element.id}>
+						return <TrThemed key={element.id} onClick={() => onClick(element.id)}>
 							{
-								Object.values(element).map((item, index) => {
-									return <TdThemed key={element.id + index + 1}>{item}</TdThemed>
+								tableColumns.map((column, index) => {
+									return <TdThemed key={element.id + index + 1}>{element[column]}</TdThemed>
 								})
+
 							}
 						</TrThemed>
 					})
@@ -64,6 +68,8 @@ const Table = ({ caption, tableContent, }) => {
 export default Table;
 
 Table.propTypes = {
-	caption: PropTypes.string.isRequired,
+	caption: PropTypes.string,
+	onClick: PropTypes.func,
+	tableColumns: PropTypes.arrayOf(PropTypes.string).isRequired,
 	tableContent: PropTypes.arrayOf(PropTypes.object).isRequired,
 }

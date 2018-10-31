@@ -1,11 +1,6 @@
 import React, { Component, } from 'react';
 import styled from 'styled-components';
-import PageTitle from './PageTitle';
-import Title from './Title';
-import Card from './Card';
-import Input from './Input';
-import Dropdown from './Dropdown';
-import Table from './Table';
+import { PageTitle, Title, Card, Input, Dropdown, Table, } from '../components';
 import { cards, tableContent, list, } from '../mock/mockData';
 
 const ContentThemed = styled.main`
@@ -57,6 +52,7 @@ class Content extends Component {
 
 	render() {
 		const { name, password, } = this.state;
+		const tableColumns = [ 'id', 'name', 'size', 'description', 'price' ];
 
 		return (
 			<ContentThemed>
@@ -81,7 +77,7 @@ class Content extends Component {
 					<Dropdown label="Select color" defaultProp="orange" list={list} onSelect={this.selectColor} />
 				</InputContainer>
 				<Title>Table Section</Title>
-				<Table caption="Mock Table" tableContent={tableContent} />
+				<Table caption="Mock Table" tableColumns={tableColumns} tableContent={tableContent} />
 			</ContentThemed>
 		)
 	}
