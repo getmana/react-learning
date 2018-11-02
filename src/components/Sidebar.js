@@ -53,7 +53,7 @@ class Sidebar extends Component {
 						<Link to="/">Home Page</Link>
 					</LiThemed>
 					<LiThemed>
-						<Link to="login">Login Page</Link>
+						<Link to="/login">Login Page</Link>
 					</LiThemed>
 					<LiThemed>
 						<Link to="/books">Books</Link>

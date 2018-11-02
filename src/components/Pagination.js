@@ -1,4 +1,4 @@
-import React, { Fragment, } from 'react';
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -30,45 +30,65 @@ const PaginationBox = styled.div`
 	}
 `;
 
-const Pagination = ({ pageNumber, pages, length, onPrevClick, onNextClick, onPageNumberClick, }) => {
-	return (
-		<PaginationBox>
-			<i
-				className={pageNumber === 1
-					? 'disabled material-icons'
-					: 'material-icons'}
-				onClick={onPrevClick}
-			>
-keyboard_arrow_left
+class Pagination extends Component {
+	handlePrevClick = () => {
+		const { pageNumber, onSelectPage, } = this.props;
 
-   </i>
-			{
-				pages.map((number, index) => {
-					return (
-						<span
-							className={index + 1 === pageNumber ? 'active' : ''}
-							key={index}
-							onClick={() => onPageNumberClick(number)}
-						>
-							{number}
+		if (pageNumber > 1) {
+			onSelectPage(pageNumber - 1);
+		}
+	}
 
-						</span>
-					)
-				})
-			}
-			<i
-				className={pageNumber === length
-					? 'disabled material-icons'
-					: 'material-icons'}
-				onClick={onNextClick}
-			>
-				keyboard_arrow_right
+	handleNextClick = () => {
+		const { pageNumber, onSelectPage, length, } = this.props;
 
-   			
-</i>
-		</PaginationBox>
+		if (pageNumber < length) {
+			onSelectPage(pageNumber + 1);
+		}
+	}
 
-	)
+	render() {
+		const { pageNumber, pages, length, onSelectPage, } = this.props;
+
+		return (
+			<PaginationBox>
+				<i
+					className={pageNumber === 1
+						? 'disabled material-icons'
+						: 'material-icons'}
+					onClick={this.handlePrevClick}
+				>
+	keyboard_arrow_left
+
+					{' '}
+    				</i>
+				{
+					pages.map((number, index) => {
+						return (
+							<span
+								className={index + 1 === pageNumber ? 'active' : ''}
+								key={index}
+								onClick={() => onSelectPage(number)}
+							>
+								{number}
+
+							</span>
+						)
+					})
+				}
+				<i
+					className={pageNumber === length
+						? 'disabled material-icons'
+						: 'material-icons'}
+					onClick={this.handleNextClick}
+				>
+					keyboard_arrow_right
+
+    				</i>
+			</PaginationBox>
+
+		)
+	}
 }
 
 export default Pagination;
@@ -77,9 +97,7 @@ Pagination.propTypes = {
 	pageNumber: PropTypes.number.isRequired,
 	pages: PropTypes.arrayOf(PropTypes.number),
 	length: PropTypes.number.isRequired,
-	onPrevClick: PropTypes.func.isRequired,
-	onNextClick: PropTypes.func.isRequired,
-	onPageNumberClick: PropTypes.func.isRequired,
+	onSelectPage: PropTypes.func.isRequired,
 }
 Pagination.defaultProps = {
 	pages: [],

@@ -14,7 +14,7 @@ function* loginSaga(action) {
 	try {
 		const res = yield call(apiService, 'GET', '/auth', data);
 		history.push('/account');
-		localStorageService.setLocalStorageItem('token', res.token);
+		localStorageService.setLocalStorageItem('token', res.data.token);
 		console.log('res saga', res)
 		yield put(loginSuccess(res.username, res.userId, res.token));
 	}

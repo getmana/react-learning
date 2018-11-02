@@ -8,8 +8,7 @@ function* getBooksSaga(action) {
 
 	try {
 		const res = yield call(apiService, 'GET', url );
-
-		yield put(getBooksSuccess(res));
+		yield put(getBooksSuccess(res.data, res.headers['x-total-count']));
 	}
 	catch (error) {
 		yield put(getBooksFailure(error.message))

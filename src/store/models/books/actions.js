@@ -8,11 +8,11 @@ export const getBooksStart = (queryString) => ({
 	},
 })
 
-export const getBooksSuccess = books => ({
+export const getBooksSuccess = (books, numberOfBooks) => ({
 	type: types.GET_BOOKS_SUCCESS,
 	payload: {
 		books,
-		numberOfBooks: books.length,
+		numberOfBooks,
 		processing: false,
 	},
 })

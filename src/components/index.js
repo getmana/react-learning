@@ -15,4 +15,5 @@ export { default as Table } from './Table';
 export { default as Card } from './Card';
 export { default as Spinner } from './Spinner';
 export { default as Pagination } from './Pagination';
+export { default as TableFunctional } from './TableFunctional';
 export { Form, Field } from 'redux-form';

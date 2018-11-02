@@ -15,7 +15,7 @@ const apiService = (method, url, requestData) => {
 		url,
 		params,
 	}).then(res => {
-		return res.data;
+		return res;
 	}).catch(error => {
 		if (error.response.status === 401) {
 			history.push('/login')

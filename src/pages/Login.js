@@ -34,8 +34,7 @@ export class Login extends Component {
 
 	render() {
 		const { isPhone, } = this.state;
-		const { handleSubmit, processing, password, submitting, } = this.props;
-		console.log('submitting', submitting)
+		const { handleSubmit, processing, password, } = this.props;
 
 		return (
 			<FormBox>
@@ -100,7 +99,6 @@ Login.propTypes = {
 const LoginContainer = reduxForm({
 	form: 'loginForm',
 	onSubmit: (values, dispatch ) => {
-		console.log('values onSubmit', values)
 		dispatch(loginStart(values));
 	},
 })(Login);
