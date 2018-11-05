@@ -2,17 +2,15 @@ import React, { Component, } from 'react';
 import { reduxForm, connect, formValueSelector, } from '../decorators';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Dropdown, Input, Button, Form, Field, } from '../components';
-import { required, emailValue, normalizePhone, numberLength, } from '../helpers';
+import { Dropdown, Input, Button, Form, Field, PageTitle, } from '../components';
+import { required, emailValue, formatPhone, numberLength, parsePhone, } from '../helpers';
 import { loginStart, } from '../store/models/user';
 
 const authType = [ 'phone', 'email' ];
 
 const FormBox = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+	padding: 20px;
+	max-width: 300px;
 `;
 
 // @reduxForm({
@@ -40,6 +38,7 @@ export class Login extends Component {
 
 		return (
 			<FormBox>
+				<PageTitle>Please, Sign In</PageTitle>
 				<Form onSubmit={handleSubmit}>
 					<Field
 						name="authType"
@@ -59,7 +58,8 @@ export class Login extends Component {
 							label="Enter your phone number:"
 							placeholder="555-55-55"
 							validate={numberLength}
-							normalize={normalizePhone}
+							format={formatPhone}
+							parse={parsePhone}
 						/>
 					}
 					{!isPhone &&
@@ -83,7 +83,7 @@ export class Login extends Component {
 						label="Enter your password: *"
 						icon="remove_red_eye"
 					/>
-					<Button styles="primary" type="submit" loading={processing}>Log In</Button>
+					<Button style="primary" type="submit" loading={processing}>Log In</Button>
 				</Form>
 			</FormBox>
 		)

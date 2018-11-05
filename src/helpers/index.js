@@ -1,1 +1,1 @@
-export { required, emailValue, normalizePhone, numberLength } from './FieldValidation';
+export { required, emailValue, formatPhone, numberLength, parsePhone, phoneFormatter } from './FieldValidation';

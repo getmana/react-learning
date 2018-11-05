@@ -37,12 +37,12 @@ const SpinnerBox = styled.div`
       margin: 0 10px;
 `;
 
-const Button = ({ children, styles, type, loading, onClick, disabled, }) => {
+const Button = ({ children, style, type, loading, onClick, disabled, }) => {
 	return (
 		<ButtonBox>
 			<ButtonThemed
-				type={type}
-				styles={styles}
+				type={type || 'button'}
+				styles={style}
 				disabled={disabled}
 				onClick={onClick}
 			>
@@ -60,7 +60,7 @@ const Button = ({ children, styles, type, loading, onClick, disabled, }) => {
 export default Button;
 
 Button.propTypes = {
-	styles: PropTypes.oneOf([ 'primary', 'secondary' ]),
+	style: PropTypes.oneOf([ 'primary', 'secondary' ]),
 	type: PropTypes.string,
 	onClick: PropTypes.func,
 	loading: PropTypes.bool,

@@ -33,14 +33,12 @@ const portalInitStyle = {
 };
 
 class Dropdown extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			currentValue: props.defaultProp,
+		state = {
+			currentValue: this.props.defaultProp,
 			isOpen: false,
 			style: portalInitStyle,
+			currentList: this.props.list,
 		};
-	}
 
 	openDropdown = (coordinats) => {
 		this.setState({
@@ -59,22 +57,32 @@ class Dropdown extends Component {
 		})
 	}
 
-	handleChange = () => {
-
+	handleChange = (e) => {
+		const { list, } = this.props;
+		this.setState({
+			currentValue: e.target.value,
+		})
+		let filter = e.target.value.toLowerCase();
+		const resultList = list.filter((item) => {
+			return item.toLowerCase().indexOf(filter) === 0;
+		})
+		this.setState({
+			currentList: filter === '' ? list : resultList,
+		})
 	}
 
-	selectVariant = (index) => {
-		const { list, onSelect, } = this.props;
+	selectVariant = (item) => {
+		const { onSelect, } = this.props;
 		this.setState({
-			currentValue: list[index],
+			currentValue: item,
 		})
-		onSelect(list[index]);
+		onSelect(item);
 		this.closeDropdown();
 	}
 
 	render() {
-		const { label, list, disabled, } = this.props;
-		const { isOpen, currentValue, style, } = this.state;
+		const { label, disabled, } = this.props;
+		const { isOpen, currentValue, style, currentList, } = this.state;
 		const openedIcon = 'keyboard_arrow_up';
 		const closedIcon = 'keyboard_arrow_down';
 
@@ -83,7 +91,7 @@ class Dropdown extends Component {
 				<Label label={label} disabled={disabled} />
 				<InputBox>
 					<InputElement
-						value={currentValue || 'Select'}
+						value={currentValue}
 						type="text"
 						disabled={disabled}
 						onChange={this.handleChange}
@@ -97,7 +105,7 @@ class Dropdown extends Component {
 				</InputBox>
 				{isOpen && (
 					<Portal portalStyle={style} onClose={this.closeDropdown}>
-						<DropdownList list={list} onSelectVariant={this.selectVariant} />
+						<DropdownList list={currentList} onSelectVariant={this.selectVariant} />
 					</Portal>
 				)}
 			</DropdownThemed>

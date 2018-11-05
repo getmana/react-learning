@@ -1,4 +1,5 @@
 import React, { Component, } from 'react';
+import { Link, } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from './Button';
 import Title from './Title';
@@ -11,6 +12,19 @@ const SidebarThemed = styled.aside`
 	flex-direction: column;
 	min-width: 250px;
 	padding: 20px;
+`;
+
+const LiThemed = styled.li`
+	padding: 5px 20px;
+
+	a {
+		color: ${props => props.theme.primary};
+	}
+
+	a:hover {
+		color: ${props => props.theme.secondary};
+	}
+
 `;
 
 class Sidebar extends Component {
@@ -32,12 +46,24 @@ class Sidebar extends Component {
 		return (
 			<SidebarThemed>
 				<Title>Change the Theme</Title>
-				<Button type="button" styles="primary" onClick={onOpenModal}>Change Theme</Button>
+				<Button style="primary" onClick={onOpenModal}>Change Theme</Button>
+				<Title>Menu</Title>
+				<ul>
+					<LiThemed>
+						<Link to="/">Home Page</Link>
+					</LiThemed>
+					<LiThemed>
+						<Link to="/login">Login Page</Link>
+					</LiThemed>
+					<LiThemed>
+						<Link to="/books">Books</Link>
+					</LiThemed>
+				</ul>
 				<Title>Nice Buttons</Title>
 				<Button>I'm Default Button</Button>
-				<Button type="button" styles="primary" loading={loading} onClick={this.handleClick}>I'm Primary Button</Button>
-				<Button type="button" styles="secondary" >I'm Secondary Button</Button>
-				<Button type="button" styles="secondary" disabled={disabled}>I'm Disabled Button</Button>
+				<Button style="primary" loading={loading} onClick={this.handleClick}>I'm Primary Button</Button>
+				<Button style="secondary" >I'm Secondary Button</Button>
+				<Button style="secondary" disabled={disabled}>I'm Disabled Button</Button>
 				<Title>Nice Spinner</Title>
 				<Spinner size="26px" />
 			</SidebarThemed>

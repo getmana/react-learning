@@ -7,18 +7,19 @@
 	"license": "ISC",
 	"scripts": {
 		"build": "parcel build ./src/index.html --out-dir dist/ --public-url ./",
-		"start": "parcel ./src/index.html && npm run ws",
+		"start": "parcel ./src/index.html",
 		"server": "nodemon server/server",
-		"test": "clear && NODE_ENV=test jest || true",
-		"ws": "node ws/server"
+		"test": "clear && NODE_ENV=test jest || true"
 	},
 	"dependencies": {
 		"axios": "^0.18.0",
 		"connected-react-router": "^4.4.1",
 		"fast-async": "^6.3.8",
 		"history": "^4.7.2",
+		"lodash": "^4.17.11",
 		"prop-types": "^15.6.2",
-		"react": "^16.5.2",
+		"react": "^16.6.0",
+		"react-debounce-input": "^3.2.0",
 		"react-dom": "^16.5.0",
 		"react-redux": "^5.0.7",
 		"react-router-dom": "^4.3.1",

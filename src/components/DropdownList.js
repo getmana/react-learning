@@ -24,9 +24,9 @@ const DropdownList = ({ list, onSelectVariant, }) => {
 		<ListThemed>
 			{
 				list.map((item, index) => {
-					return <ItemThemed key={index} onClick={() => onSelectVariant(index)}>
+					return <ItemThemed key={index} onClick={() => onSelectVariant(item)}>
 						{item}
-					</ItemThemed>
+            </ItemThemed>
 				})
 			}
 		</ListThemed>

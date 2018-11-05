@@ -1,15 +1,15 @@
 export const initialState = {
 	processing: false,
-	username: '',
-	userId: '',
-	token: '',
+	url: '',
+	books: [],
+	numberOfBooks: 0,
 	error: {},
 }
 
 export const types = {
-	LOGIN_START: 'LOGIN_START',
-	LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-	LOGIN_FAILURE: 'LOGIN_FAILURE',
+	GET_BOOKS_START: 'GET_BOOKS_START',
+	GET_BOOKS_SUCCESS: 'GET_BOOKS_SUCCESS',
+	GET_BOOKS_FAILURE: 'GET_BOOKS_FAILURE',
 }
 
 export * from './actions'

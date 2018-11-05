@@ -670,7 +670,7 @@ module.exports = {
 		"react/forbid-prop-types": ["error", { "forbid": ["any"], checkContextTypes: true, checkChildContextTypes: true }], // "array", "object" 
 		"react/jsx-boolean-value": "warn",
 		"react/jsx-child-element-spacing": "off", 
-		"react/jsx-closing-bracket-location": ["warn", 'tag-aligned'],
+		"react/jsx-closing-bracket-location": [1, "tag-aligned"],
 		"react/jsx-closing-tag-location": "warn",
 		"react/jsx-curly-brace-presence": ["warn", { "props": "never", "children": "never" }],
 		"react/jsx-curly-spacing": ["warn", "never", { "allowMultiline": false }],

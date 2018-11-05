@@ -10,10 +10,12 @@ export const loginStart = (data) => ({
 	},
 })
 
-export const loginSuccess = data => ({
+export const loginSuccess = (username, userId, token) => ({
 	type: types.LOGIN_SUCCESS,
 	payload: {
-		data,
+		username,
+		userId,
+		token,
 		processing: false,
 	},
 })

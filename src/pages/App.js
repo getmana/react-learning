@@ -1,11 +1,15 @@
-import React, { Component, Fragment, } from 'react';
+import React, { Component, } from 'react';
 import { Link, Route, Switch, } from 'react-router-dom';
 import styled, { ThemeProvider, } from 'styled-components';
 import Logo from '../images/react-logo.png';
 import { themeIndigo, themeOrange, } from '../configs/themes';
-import { Header, Footer, MainSection, Portal, SelectThemeModal, Sidebar, Content, } from '../components';
+import { Header, Footer, MainSection, Portal, SelectThemeModal, Sidebar, } from '../components';
+import HomePage from './HomePage';
 import Login from './Login';
 import Account from './Account';
+import Books from './Books';
+import BookPage from './BookPage';
+import SearchResults from './SearchResults';
 
 const Page = styled.div`
 	display: flex;
@@ -94,19 +98,14 @@ class App extends Component {
 						</LinkBox>
 					</Header>
 					<MainSection>
+						<Sidebar onOpenModal={this.openModal} />
 						<Switch>
-							<Route
-								exact
-								path="/"
-								render={() => (
-									<Fragment>
-										<Sidebar onOpenModal={this.openModal} />
-										<Content />
-									</Fragment>
-								)}
-							/>
-							<Route path="/login" render={() => <Login />} />
-							<Route path="/account" render={() => <Account />} />
+							<Route exact path="/" component={HomePage} />
+							<Route path="/login" component={Login} />
+							<Route path="/account" component={Account} />
+							<Route path="/search/:params" component={SearchResults} />
+							<Route path="/books" component={Books} />
+							<Route path="/book/:id" component={BookPage} />
 						</Switch>
 					</MainSection>
 					<Footer>

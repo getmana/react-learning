@@ -5,11 +5,11 @@ const emailValue = value =>
 		? 'Invalid email address'
 		: undefined
 
-const numberLength = (value = '') => (value.length < 9 ? 'Phone number is incorrect' : undefined);
+const numberLength = (value = '') => (value.length < 7 ? 'Phone number is incorrect' : undefined);
 
-const normalizePhone = value => {
+const formatPhone = value => {
 	if (!value) {
-		return value
+		return ''
 	}
 
 	const onlyNums = value.replace(/[^\d]/g, '')
@@ -28,9 +28,14 @@ const normalizePhone = value => {
 	)}`
 }
 
+const parsePhone = value => {
+	return value ? value.replace( /-/g, '') : '';
+}
+
 export {
 	required,
 	emailValue,
 	numberLength,
-	normalizePhone
+	formatPhone,
+	parsePhone
 };
