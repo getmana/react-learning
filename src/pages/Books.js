@@ -30,15 +30,34 @@ export class Books extends Component {
 
 	componentDidMount() {
 		const { limit, } = this.state;
+		history.push('/books');
 		this.props.getBooksStart({ limit, });
 	}
 
-	componentWillUnmount() {
-		this.props.clearTableParams();
+	componentDidUpdate(prevProps, prevState) {
+		const { limit, title, } = this.state;
+		const path = this.props.match.path;
+
+		if (
+			prevProps.match.path !== path && path === '/books' ||
+			prevState.title !== title && title === ''
+		) {
+			this.setState({
+				title: '',
+			})
+			history.push('/books');
+			this.props.clearTableParams();
+			this.props.getBooksStart({ limit, });
+		}
 	}
 
 	getBooks = (query) => {
-		const { limit, } = this.state;
+		const { limit, title, } = this.state;
+
+		if (title) {
+			history.push(`/search/${title}`);
+			query = { q: title, ...query, };
+		}
 		this.props.getBooksStart({ ...query, limit, });
 	}
 
@@ -47,8 +66,11 @@ export class Books extends Component {
 	}
 
 	searchBookRequest = (e) => {
+		const { limit, } = this.state;
+		this.props.clearTableParams();
 		const search = e.target.value;
 		history.push(`/search/${search}`)
+		this.getBooks({ q: search, limit, })
 	}
 
 	handleChange = (e) => {
@@ -65,6 +87,9 @@ export class Books extends Component {
 	render() {
 		const { processing, books, numberOfBooks, } = this.props;
 		const { columns, title, limit, } = this.state;
+		const { params, } = this.props.match.params || {};
+		const { url, } = this.props.match;
+		const isSearchResults = url.indexOf('search');
 
 		return (
 			<PageThemed>
@@ -72,7 +97,14 @@ export class Books extends Component {
 					processing ?
 						<Spinner size="50px" />
 						: <Fragment>
-							<PageTitle>Books</PageTitle>
+							<Fragment>
+								{
+									isSearchResults >= 0
+										? <PageTitle>{`Search Results for '${params}'`}</PageTitle>
+										: <PageTitle>Books</PageTitle>
+								}
+
+							</Fragment>
 							<InputBox>
 								<Input
 									type="text"
@@ -87,7 +119,7 @@ export class Books extends Component {
 									<TableFunctional
 										tableColumns={columns}
 										tableContent={books}
-										caption="Available Books"
+										caption={isSearchResults >= 0 ? 'Search Results' : 'Available Books'}
 										limit={limit}
 										numberOfItems={numberOfBooks}
 										onClick={this.handleClick}
@@ -128,7 +160,12 @@ const mapDispatchToProps = (dispatch) => ({
 
 		if (params) {
 			for (let key in params) {
-				queryString += `_${key}=${params[key]}` + '&';
+				if (key === 'q') {
+					queryString = `?q=${params[key]}&`
+				}
+				else {
+					queryString += `_${key}=${params[key]}` + '&';
+				}
 			}
 		}
 		else {

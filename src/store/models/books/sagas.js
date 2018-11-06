@@ -1,5 +1,5 @@
 import { takeLatest, put, call, all, } from 'redux-saga/effects';
-import { getBooksSuccess, getBooksFailure, types, } from './index';
+import { getBooksSuccess, getBooksFailure, types, getLanguagesSuccess, getLanguagesFailure, } from './index';
 import { apiService, } from '../../../services';
 
 function* getBooksSaga(action) {
@@ -15,8 +15,21 @@ function* getBooksSaga(action) {
 	}
 }
 
+function* getLanguagesSaga() {
+	try {
+		const res = yield call(apiService, 'GET', '/languages' );
+		yield put(getLanguagesSuccess(res.data));
+	}
+	catch (error) {
+		yield put(getLanguagesFailure(error.message))
+	}
+}
+
 function* watchGetBooksSaga() {
-	yield all([ takeLatest(types.GET_BOOKS_START, getBooksSaga) ]);
+	yield all([
+		takeLatest(types.GET_BOOKS_START, getBooksSaga),
+		takeLatest(types.GET_LANGUAGES_START, getLanguagesSaga)
+	]);
 }
 
 export default watchGetBooksSaga;

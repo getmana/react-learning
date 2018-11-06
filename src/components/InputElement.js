@@ -27,7 +27,7 @@ class InputElement extends Component {
 	}
 
 	render() {
-		const { type, value, onChange, placeholder, input, disabled, } = this.props;
+		const { type, value, onChange, placeholder, input, disabled, style, } = this.props;
 
 		return (
 			<InputThemed
@@ -37,6 +37,7 @@ class InputElement extends Component {
 				placeholder={placeholder}
 				onChange={onChange}
 				onClick={this.handleClick}
+				style={style}
 				{...input}
 			/>
 		)
@@ -49,6 +50,14 @@ InputElement.propTypes = {
 	type: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	onOpenDropdown: PropTypes.func,
-	value: PropTypes.string,
+	value: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+	]),
 	placeholder: PropTypes.string,
+	style: PropTypes.objectOf(PropTypes.string),
+}
+
+InputElement.defaultProps = {
+	style: {},
 }

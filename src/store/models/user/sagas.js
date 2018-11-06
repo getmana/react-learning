@@ -10,6 +10,7 @@ function* loginSaga(action) {
 	if (phone && email) {
 		data = { phone, password, }
 	}
+	localStorageService.clearLocalStorage();
 
 	try {
 		const res = yield call(apiService, 'GET', '/auth', data);

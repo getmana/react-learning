@@ -8,7 +8,7 @@ import HomePage from './HomePage';
 import Login from './Login';
 import Account from './Account';
 import Books from './Books';
-import BookPage from './BookPage';
+import SingleBook from './SingleBook';
 import SearchResults from './SearchResults';
 
 const Page = styled.div`
@@ -103,9 +103,9 @@ class App extends Component {
 							<Route exact path="/" component={HomePage} />
 							<Route path="/login" component={Login} />
 							<Route path="/account" component={Account} />
-							<Route path="/search/:params" component={SearchResults} />
+							<Route path="/search/:params" component={Books} />
 							<Route path="/books" component={Books} />
-							<Route path="/book/:id" component={BookPage} />
+							<Route path="/book/:id" component={SingleBook} />
 						</Switch>
 					</MainSection>
 					<Footer>

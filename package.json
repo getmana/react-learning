@@ -28,7 +28,8 @@
 		"redux-form": "^7.4.2",
 		"redux-saga": "^0.16.0",
 		"reset-css": "^4.0.1",
-		"styled-components": "^4.0.0"
+		"styled-components": "^4.0.0",
+		"styled-theming": "^2.2.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.1.2",

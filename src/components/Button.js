@@ -41,7 +41,7 @@ const Button = ({ children, style, type, loading, onClick, disabled, }) => {
 	return (
 		<ButtonBox>
 			<ButtonThemed
-				type={type || 'button'}
+				type={type}
 				styles={style}
 				disabled={disabled}
 				onClick={onClick}
@@ -66,4 +66,7 @@ Button.propTypes = {
 	loading: PropTypes.bool,
 	disabled: PropTypes.bool,
 	children: PropTypes.string,
+}
+Button.defaultProps = {
+	type: 'button',
 }
