@@ -22,7 +22,7 @@ server.use((req, res, next) =>
 	setTimeout(next, getRandomInt(1000, 2500))
 )
 
-auth middleware
+// auth middleware
 server.use((req, res, next) => {
 	if (req.path === '/auth' || isAuthorized(req.query.token))
 	  next()
