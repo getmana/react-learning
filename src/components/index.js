@@ -16,4 +16,7 @@ export { default as Card } from './Card';
 export { default as Spinner } from './Spinner';
 export { default as Pagination } from './Pagination';
 export { default as TableFunctional } from './TableFunctional';
+export { default as CenteredModal } from './CenteredModal';
+export { default as DeleteBookModal } from './DeleteBookModal';
+export { default as MessageModal } from './MessageModal';
 export { Form, Field } from 'redux-form';

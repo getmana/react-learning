@@ -87,8 +87,8 @@ class Input extends Component {
 						type={type}
 						value={currentValue}
 						placeholder={placeholder}
-						onChange={onChange}
 						style={style}
+						onChange={onChange}
 						{...input}
 					/>
 					{

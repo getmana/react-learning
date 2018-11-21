@@ -27,5 +27,8 @@ export default DropdownList;
 
 DropdownList.propTypes = {
 	onSelectVariant: PropTypes.func.isRequired,
-	list: PropTypes.arrayOf(PropTypes.string).isRequired,
+	list: PropTypes.arrayOf(PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+	])).isRequired,
 }

@@ -21,19 +21,19 @@ export class TableFunctional extends Component {
 	}
 
 	formPageNumbers = () => {
-		const { numberOfItems, limit, savePages, } = this.props;
+		const { numberOfItems, limit, } = this.props;
 		const numberOfPages = Math.ceil(numberOfItems / limit);
 		let pages = [];
 
 		for (let i = 1; i <= numberOfPages; i++) {
 			pages.push(i);
 		}
-		savePages(pages)
+		this.props.savePages(pages)
 	}
 
 	sortItems = () => {
-		this.props.sortItems();
-		this.props.onLoadItems({ sort: 'title', });
+		this.props.sortItems(true);
+		this.props.onLoadItems({ _sort: 'title', });
 	}
 
 	selectPage = (pageNumber) => {
@@ -41,10 +41,10 @@ export class TableFunctional extends Component {
 		let query = {};
 
 		if (isSorted) {
-			query = { sort: 'title', }
+			query = { _sort: 'title', }
 		}
 		changePageNumber(pageNumber);
-		onLoadItems({ ...query, page: pageNumber, });
+		onLoadItems({ ...query, _page: pageNumber, });
 	}
 
 	render() {
@@ -116,7 +116,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
 	changePageNumber: (pageNumber) => dispatch(changePageNumber(pageNumber)),
-	sortItems: () => dispatch(sortItems(true)),
+	sortItems: (isSorted) => dispatch(sortItems(isSorted)),
 	savePages: (pages) => dispatch(savePages(pages)),
 
 })

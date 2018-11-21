@@ -3,10 +3,10 @@ import { connect, } from 'react-redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { getBooksStart, } from '../store/models/books';
-import { clearTableParams, } from '../store/models/tableFunctional';
+import { clearTableParams, sortItems, } from '../store/models/tableFunctional';
 import history from '../store/routingHistory';
 import styled from 'styled-components';
-import { PageTitle, Spinner, Input, TableFunctional, } from '../components';
+import { PageTitle, Spinner, Input, TableFunctional, Button, } from '../components';
 
 const PageThemed = styled.div`
 	padding: 20px;
@@ -21,7 +21,7 @@ export class Books extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			limit: 15,
+			_limit: 15,
 			columns: [ 'author', 'title', 'year', 'rating' ],
 			title: '',
 		};
@@ -29,13 +29,14 @@ export class Books extends Component {
 	}
 
 	componentDidMount() {
-		const { limit, } = this.state;
+		const { _limit, } = this.state;
+		this.props.clearTableParams();
 		history.push('/books');
-		this.props.getBooksStart({ limit, });
+		this.props.getBooksStart({ _limit, });
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const { limit, title, } = this.state;
+		const { _limit, title, } = this.state;
 		const path = this.props.match.path;
 
 		if (
@@ -47,30 +48,35 @@ export class Books extends Component {
 			})
 			history.push('/books');
 			this.props.clearTableParams();
-			this.props.getBooksStart({ limit, });
+			this.props.getBooksStart({ _limit, });
 		}
 	}
 
+	componentWillUnmount() {
+		this.props.sortItems(false);
+	}
+
 	getBooks = (query) => {
-		const { limit, title, } = this.state;
+		const { _limit, title, } = this.state;
 
 		if (title) {
 			history.push(`/search/${title}`);
 			query = { q: title, ...query, };
 		}
-		this.props.getBooksStart({ ...query, limit, });
+		this.props.getBooksStart({ ...query, _limit, });
 	}
 
 	handleClick = (id) => {
+		this.props.clearTableParams();
 		history.push(`/book/${id}`)
 	}
 
 	searchBookRequest = (e) => {
-		const { limit, } = this.state;
+		const { _limit, } = this.state;
 		this.props.clearTableParams();
 		const search = e.target.value;
 		history.push(`/search/${search}`)
-		this.getBooks({ q: search, limit, })
+		this.getBooks({ q: search, _limit, })
 	}
 
 	handleChange = (e) => {
@@ -84,9 +90,13 @@ export class Books extends Component {
 		}
 	}
 
+	addBook = () => {
+		history.push('/book/add')
+	}
+
 	render() {
 		const { processing, books, numberOfBooks, } = this.props;
-		const { columns, title, limit, } = this.state;
+		const { columns, title, _limit, } = this.state;
 		const { params, } = this.props.match.params || {};
 		const { url, } = this.props.match;
 		const isSearchResults = url.indexOf('search');
@@ -106,6 +116,7 @@ export class Books extends Component {
 
 							</Fragment>
 							<InputBox>
+								<Button style="primary" onClick={this.addBook}>Add a New Book</Button>
 								<Input
 									type="text"
 									label="Search the book by the title:"
@@ -120,14 +131,14 @@ export class Books extends Component {
 										tableColumns={columns}
 										tableContent={books}
 										caption={isSearchResults >= 0 ? 'Search Results' : 'Available Books'}
-										limit={limit}
+										limit={_limit}
 										numberOfItems={numberOfBooks}
 										onClick={this.handleClick}
 										onLoadItems={this.getBooks}
 									/>
 							}
 
-						  </Fragment>
+						</Fragment>
 				}
 			</PageThemed>
 		)
@@ -143,6 +154,12 @@ Books.propTypes = {
 		PropTypes.number
 	]),
 	clearTableParams: PropTypes.func.isRequired,
+	sortItems: PropTypes.func.isRequired,
+	match: PropTypes.shape({
+		path: PropTypes.string,
+		params: PropTypes.object,
+		url: PropTypes.string,
+	}),
 }
 
 const mapStateToProps = (state) => {
@@ -155,25 +172,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	getBooksStart: (params) => {
-		let queryString = '?';
-
-		if (params) {
-			for (let key in params) {
-				if (key === 'q') {
-					queryString = `?q=${params[key]}&`
-				}
-				else {
-					queryString += `_${key}=${params[key]}` + '&';
-				}
-			}
-		}
-		else {
-			queryString = ''
-		}
-		dispatch(getBooksStart(queryString))
-	},
+	getBooksStart: (params) => dispatch(getBooksStart(params)),
 	clearTableParams: () => dispatch(clearTableParams()),
+	sortItems: (isSorted) => dispatch(sortItems(isSorted)),
 })
 
 export default connect(

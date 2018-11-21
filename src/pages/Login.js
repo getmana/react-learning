@@ -30,11 +30,13 @@ export class Login extends Component {
 		this.setState({
 			isPhone,
 		})
+		this.props.change('authType', variant)
 	}
 
 	render() {
 		const { isPhone, } = this.state;
 		const { handleSubmit, processing, password, } = this.props;
+		const defaultProp = 'phone';
 
 		return (
 			<FormBox>
@@ -45,7 +47,7 @@ export class Login extends Component {
 						disabled={processing}
 						component={Dropdown}
 						label="Select authorization type:"
-						defaultProp="phone"
+						defaultProp={defaultProp}
 						list={authType}
 						onSelect={this.selectVariant}
 					/>
@@ -98,6 +100,7 @@ Login.propTypes = {
 
 const LoginContainer = reduxForm({
 	form: 'loginForm',
+	enableReinitialize: true,
 	onSubmit: (values, dispatch ) => {
 		dispatch(loginStart(values));
 	},
@@ -107,10 +110,14 @@ const selector = formValueSelector('loginForm')
 
 const mapStateToProps = (state) => {
 	const password = selector(state, 'password');
+	const initLogin = {
+		authType: 'phone',
+	}
 
 	return ({
 		processing: state.user.processing,
 		password,
+		initialValues: { ...initLogin, },
 	})
 }
 

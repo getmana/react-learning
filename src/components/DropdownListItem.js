@@ -32,6 +32,9 @@ class DropdownListItem extends Component {
 export default DropdownListItem;
 
 DropdownListItem.propTypes = {
-	item: PropTypes.string,
+	item: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+	]),
 	onSelectVariant: PropTypes.func.isRequired,
 }

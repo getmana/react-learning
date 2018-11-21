@@ -27,7 +27,7 @@ class InputElement extends Component {
 	}
 
 	render() {
-		const { type, value, onChange, placeholder, input, disabled, style, } = this.props;
+		const { type, value, onChange, placeholder, disabled, style, } = this.props;
 
 		return (
 			<InputThemed
@@ -35,10 +35,9 @@ class InputElement extends Component {
 				type={type}
 				value={value}
 				placeholder={placeholder}
+				style={style}
 				onChange={onChange}
 				onClick={this.handleClick}
-				style={style}
-				{...input}
 			/>
 		)
 	}
