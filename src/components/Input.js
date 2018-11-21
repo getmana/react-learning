@@ -74,18 +74,20 @@ class Input extends Component {
 			disabled,
 			currentValue,
 			onChange,
+			style,
 		} = this.props;
 		const { touched, error, warning, } = meta || {};
 
 		return (
 			<InputComponent disabled={disabled}>
-				<Label label={label} disabled={disabled} />
+				<Label label={label} disabled={disabled} style={style} />
 				<InputBox>
 					<InputElement
 						disabled={disabled}
 						type={type}
 						value={currentValue}
 						placeholder={placeholder}
+						style={style}
 						onChange={onChange}
 						{...input}
 					/>
@@ -116,4 +118,9 @@ Input.propTypes = {
 	icon: PropTypes.string,
 	errorMessage: PropTypes.string,
 	placeholder: PropTypes.string,
+	style: PropTypes.objectOf(PropTypes.string),
+}
+
+Input.defaultProps = {
+	style: {},
 }

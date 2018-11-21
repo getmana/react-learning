@@ -25,3 +25,5 @@ yarn-error.log*
 .next
 
 package-lock.json
+
+.vscode/

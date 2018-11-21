@@ -3,17 +3,19 @@ import history from '../store/routingHistory';
 import localStorageService from './localStorageService';
 
 const apiService = (method, url, requestData) => {
-	const params = requestData || {};
+	const { params, data, } = requestData || {};
 	const token = localStorageService.getLocalStorageItem('token');
+	const requestParams = { ...params, };
 
 	if (token) {
-		params.token = token;
+		requestParams.token = token;
 	}
 
 	return HTTP({
 		method,
 		url,
-		params,
+		params: requestParams,
+		data,
 	}).then(res => {
 		return res;
 	}).catch(error => {

@@ -3,13 +3,12 @@ import { Link, Route, Switch, } from 'react-router-dom';
 import styled, { ThemeProvider, } from 'styled-components';
 import Logo from '../images/react-logo.png';
 import { themeIndigo, themeOrange, } from '../configs/themes';
-import { Header, Footer, MainSection, Portal, SelectThemeModal, Sidebar, } from '../components';
+import { Header, Footer, MainSection, Portal, SelectThemeModal, Sidebar, CenteredModal, } from '../components';
 import HomePage from './HomePage';
 import Login from './Login';
 import Account from './Account';
 import Books from './Books';
-import BookPage from './BookPage';
-import SearchResults from './SearchResults';
+import SingleBook from './SingleBook';
 
 const Page = styled.div`
 	display: flex;
@@ -94,7 +93,7 @@ class App extends Component {
 						<Link to="/"><LogoImage src={Logo} /></Link>
 						<HeaderTitle>Hello from React</HeaderTitle>
 						<LinkBox>
-							<Link to="login">login</Link>
+							<Link to="/login">login</Link>
 						</LinkBox>
 					</Header>
 					<MainSection>
@@ -103,9 +102,9 @@ class App extends Component {
 							<Route exact path="/" component={HomePage} />
 							<Route path="/login" component={Login} />
 							<Route path="/account" component={Account} />
-							<Route path="/search/:params" component={SearchResults} />
+							<Route path="/search/:params" component={Books} />
 							<Route path="/books" component={Books} />
-							<Route path="/book/:id" component={BookPage} />
+							<Route path="/book/:id" component={SingleBook} />
 						</Switch>
 					</MainSection>
 					<Footer>
@@ -113,11 +112,13 @@ class App extends Component {
 					</Footer>
 					{modalIsOpen && (
 						<Portal portalStyle={style} onClose={this.closeModal}>
-							<SelectThemeModal
-								theme={themeName}
-								selectTheme={this.handleChange}
-								onClose={this.closeModal}
-							/>
+							<CenteredModal title="Select The Theme">
+								<SelectThemeModal
+									theme={themeName}
+									selectTheme={this.handleChange}
+									onClose={this.closeModal}
+								/>
+							</CenteredModal>
 						</Portal>
 					)}
 				</Page>

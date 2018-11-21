@@ -14,6 +14,10 @@ const DropdownThemed = styled.div`
 	box-sizing: border-box;
 	color: ${props => props.theme.primary};
 	position: relative;
+
+	.colored-disabled i {
+		display: none;
+	}
 `;
 
 const InputBox = styled.div`
@@ -32,19 +36,24 @@ const portalInitStyle = {
 	width: '280px',
 };
 
+const ErrorMessage = styled.div`
+	color: red;
+	font-size: 12px;
+`;
+
 class Dropdown extends Component {
 		state = {
 			currentValue: this.props.defaultProp,
 			isOpen: false,
-			style: portalInitStyle,
+			portalStyle: portalInitStyle,
 			currentList: this.props.list,
 		};
 
 	openDropdown = (coordinats) => {
 		this.setState({
 			isOpen: true,
-			style: {
-				...this.state.style,
+			portalStyle: {
+				...this.state.portalStyle,
 				top: coordinats.bottom + 5,
 				left: coordinats.left,
 			},
@@ -72,30 +81,34 @@ class Dropdown extends Component {
 	}
 
 	selectVariant = (item) => {
-		const { onSelect, } = this.props;
+		const { onSelect, input, } = this.props;
+		const { name, } = input || {};
 		this.setState({
 			currentValue: item,
 		})
-		onSelect(item);
+		onSelect(item, name);
 		this.closeDropdown();
 	}
 
 	render() {
-		const { label, disabled, } = this.props;
-		const { isOpen, currentValue, style, currentList, } = this.state;
+		const { label, disabled, style, className, input, meta, } = this.props;
+		const { touched, error, warning, } = meta || {};
+		const { isOpen, currentValue, portalStyle, currentList, } = this.state;
 		const openedIcon = 'keyboard_arrow_up';
 		const closedIcon = 'keyboard_arrow_down';
 
 		return (
 			<DropdownThemed>
-				<Label label={label} disabled={disabled} />
-				<InputBox>
+				<Label label={label} disabled={disabled} style={style} />
+				<InputBox className={className}>
 					<InputElement
 						value={currentValue}
 						type="text"
 						disabled={disabled}
+						style={style}
 						onChange={this.handleChange}
 						onOpenDropdown={this.openDropdown}
+						{...input}
 					/>
 					<Icon className="material-icons" disabled={disabled}>
 						{
@@ -104,10 +117,15 @@ class Dropdown extends Component {
 					</Icon>
 				</InputBox>
 				{isOpen && (
-					<Portal portalStyle={style} onClose={this.closeDropdown}>
+					<Portal portalStyle={portalStyle} onClose={this.closeDropdown}>
 						<DropdownList list={currentList} onSelectVariant={this.selectVariant} />
 					</Portal>
 				)}
+				{
+					touched &&
+					((error && <ErrorMessage>{error}</ErrorMessage>) ||
+						(warning && <ErrorMessage>{warning}</ErrorMessage>))
+				}
 			</DropdownThemed>
 		)
 	}
@@ -117,8 +135,14 @@ export default Dropdown;
 
 Dropdown.propTypes = {
 	label: PropTypes.string.isRequired,
-	list: PropTypes.arrayOf(PropTypes.string).isRequired,
-	defaultProp: PropTypes.string,
+	list: PropTypes.arrayOf(PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+	])).isRequired,
+	defaultProp: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+	]),
 	onSelect: PropTypes.func,
 	disabled: PropTypes.bool,
 }

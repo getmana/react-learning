@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import DropdownListItem from './DropdownListItem';
 
 const ListThemed = styled.ul`
     display: flex;
@@ -10,23 +11,12 @@ const ListThemed = styled.ul`
     background-color: ${props => props.theme.secondaryBg};
 `;
 
-const ItemThemed = styled.li`
-    padding: 0.4em 1em;
-    cursor: pointer;
-
-    :hover {
-        background-color: ${props => props.theme.unactive};
-    }
-`;
-
 const DropdownList = ({ list, onSelectVariant, }) => {
 	return (
 		<ListThemed>
 			{
 				list.map((item, index) => {
-					return <ItemThemed key={index} onClick={() => onSelectVariant(item)}>
-						{item}
-            </ItemThemed>
+					return <DropdownListItem key={index} item={item} onSelectVariant={onSelectVariant} />
 				})
 			}
 		</ListThemed>
@@ -37,5 +27,8 @@ export default DropdownList;
 
 DropdownList.propTypes = {
 	onSelectVariant: PropTypes.func.isRequired,
-	list: PropTypes.arrayOf(PropTypes.string).isRequired,
+	list: PropTypes.arrayOf(PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+	])).isRequired,
 }
