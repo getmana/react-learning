@@ -9,9 +9,6 @@ export const initialState = {
 	ratings: [],
 	editingMode: false,
 	currentBook: {},
-	modalTitle: '',
-	modalMessage: '',
-	error: '',
 }
 
 export const types = {
@@ -40,8 +37,6 @@ export const types = {
 	DELETE_BOOK_START: 'DELETE_BOOK_START',
 	DELETE_BOOK_SUCCESS: 'DELETE_BOOK_SUCCESS',
 	DELETE_BOOK_FAILURE: 'DELETE_BOOK_FAILURE',
-
-	CLEAR_MODAL_INFO: 'CLEAR_MODAL_INFO',
 
 	ADD_BOOK_START: 'ADD_BOOK_START',
 	ADD_BOOK_SUCCESS: 'ADD_BOOK_SUCCESS',

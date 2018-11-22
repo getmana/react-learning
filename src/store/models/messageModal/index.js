@@ -1,17 +1,13 @@
 export const initialState = {
-	processing: false,
-	username: '',
-	userId: '',
-	token: '',
+	message: '',
+	title: '',
 }
 
 export const types = {
-	LOGIN_START: 'LOGIN_START',
-	LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-	LOGIN_FAILURE: 'LOGIN_FAILURE',
+	OPEN_MESSAGE_MODAL: 'OPEN_MESSAGE_MODAL',
+	CLOSE_MESSAGE_MODAL: 'CLOSE_MESSAGE_MODAL',
 }
 
 export * from './actions'
-export * from './sagas'
 
 export default (state = initialState, action) => action.type in types ? { ...state, ...action.payload, } : state

@@ -10,13 +10,11 @@ import {
 	deleteBookStart,
 	addBookStart,
 	clearCurrentBook,
-	clearModalInfo,
 } from '../store/models/books';
 import { clearTableParams, } from '../store/models/tableFunctional';
-import styled, { withTheme, } from 'styled-components';
-import history from '../store/routingHistory';
+import styled from 'styled-components';
 import { englishLetters, imageLinks, positiveNumbers, lessThenCurrent, wikiFormat, isOneOf, onlyInteger, required, } from '../helpers';
-import { PageTitle, Spinner, Input, Button, Form, Field, Dropdown, Portal, CenteredModal, DeleteBookModal, MessageModal, } from '../components';
+import { PageTitle, Spinner, Input, Button, Form, Field, Dropdown, Portal, CenteredModal, DeleteBookModal, } from '../components';
 
 const PageThemed = styled.div`
 	padding: 20px;
@@ -46,8 +44,6 @@ const portalInitStyle = {
 	left: '30%',
 };
 
-@withTheme
-
 export class SingleBook extends Component {
 	state = {
 		modalIsOpen: false,
@@ -63,7 +59,7 @@ export class SingleBook extends Component {
 			this.props.setEditingMode(true)
 		}
 		else {
-			this.props.getCurrentBookStart({ id, });
+			this.props.getCurrentBookStart(id);
 		}
 	}
 
@@ -90,7 +86,7 @@ export class SingleBook extends Component {
 		})
 	}
 
-	DeleteBook = () => {
+	deleteBook = () => {
 		const { id, } = this.props.match.params;
 		this.props.deleteBookStart(id);
 		this.setState({
@@ -104,36 +100,19 @@ export class SingleBook extends Component {
 		})
 	}
 
-	closeMessageModal = () => {
-		const { modalMessage, } = this.props;
-		this.props.clearModalInfo();
-		this.props.clearTableParams();
-
-		if (modalMessage === 'The book was successfully deleted') {
-			history.push('/books')
-		}
-	}
-
 	render() {
 		const {
 			processing,
 			handleSubmit,
 			languages,
 			language,
-			theme,
 			ratings,
 			rating,
 			processingLanguages,
 			processingRatings,
 			editingMode,
 			title,
-			modalTitle,
-			modalMessage,
 		} = this.props;
-		const style = {
-			'color': `${theme.primary}`,
-			'border': 'none',
-		}
 		const { modalIsOpen, } = this.state;
 
 		return (
@@ -151,8 +130,7 @@ export class SingleBook extends Component {
 									type="text"
 									label="Book Title:"
 									validate={required}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 								/>
 								<Field
 									name="author"
@@ -160,8 +138,7 @@ export class SingleBook extends Component {
 									type="text"
 									label="Book Author:"
 									validate={[ englishLetters, required ]}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 								/>
 								<Field
 									name="country"
@@ -169,8 +146,7 @@ export class SingleBook extends Component {
 									type="text"
 									label="Country:"
 									validate={[ englishLetters, required ]}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 								/>
 								<Field
 									name="year"
@@ -178,8 +154,7 @@ export class SingleBook extends Component {
 									type="number"
 									label="Year:"
 									validate={[ lessThenCurrent, positiveNumbers, onlyInteger, required ]}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 								/>
 								<Field
 									name="language"
@@ -189,9 +164,8 @@ export class SingleBook extends Component {
 									list={languages}
 									defaultProp={language}
 									validate={required}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
-									className={!editingMode ? 'colored-disabled' : ''}
+									readOnly={!editingMode}
+									className={!editingMode ? 'readonly-dropdown' : ''}
 									normalize={isOneOf(languages)}
 									onSelect={this.selectVariant}
 								/>
@@ -203,9 +177,8 @@ export class SingleBook extends Component {
 									list={ratings}
 									defaultProp={rating}
 									validate={required}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
-									className={!editingMode ? 'colored-disabled' : ''}
+									readOnly={!editingMode}
+									className={!editingMode ? 'readonly-dropdown' : ''}
 									normalize={isOneOf(ratings)}
 									onSelect={this.selectVariant}
 								/>
@@ -215,16 +188,14 @@ export class SingleBook extends Component {
 									type="text"
 									label="Book Link:"
 									validate={wikiFormat}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 								/>
 								<Field
 									name="pages"
 									component={Input}
 									type="number"
 									label="Number of Pages:"
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 									validate={[ positiveNumbers, onlyInteger, required ]}
 								/>
 								<Field
@@ -233,8 +204,7 @@ export class SingleBook extends Component {
 									type="text"
 									label="Image Link:"
 									validate={[ imageLinks, required ]}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 								/>
 								{
 									editingMode &&
@@ -258,14 +228,11 @@ export class SingleBook extends Component {
 						<CenteredModal title="Delete Book">
 							<DeleteBookModal
 								bookTitle={title}
-								onDelete={this.DeleteBook}
+								onDelete={this.deleteBook}
 								onClose={this.closeModal}
 							/>
 						</CenteredModal>
 					</Portal>
-				)}
-				{modalMessage && (
-					<MessageModal title={modalTitle} info={modalMessage} onClose={this.closeMessageModal} />
 				)}
 			</PageThemed>
 		)
@@ -300,10 +267,7 @@ SingleBook.propTypes = {
 	title: PropTypes.string,
 	deleteBookStart: PropTypes.func.isRequired,
 	clearTableParams: PropTypes.func.isRequired,
-	modalMessage: PropTypes.string,
-	modalTitle: PropTypes.string,
 	clearCurrentBook: PropTypes.func.isRequired,
-	clearModalInfo: PropTypes.func.isRequired,
 }
 
 SingleBook.defaultProp = {
@@ -312,8 +276,6 @@ SingleBook.defaultProp = {
 	ratings: [],
 	rating: '',
 	title: '',
-	modalMessage: '',
-	modalTitle: '',
 }
 
 const SingleBookContainer = reduxForm({
@@ -368,17 +330,13 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	getCurrentBookStart: (params) => {
-		const { id, } = params;
-		dispatch(getCurrentBookStart(id))
-	},
+	getCurrentBookStart: (id) => dispatch(getCurrentBookStart(id)),
 	getLanguagesStart: () => dispatch(getLanguagesStart()),
 	getRatingsStart: () => dispatch(getRatingsStart()),
 	setEditingMode: (value) => dispatch(setEditingMode(value)),
 	deleteBookStart: (id) => dispatch(deleteBookStart(id)),
 	clearTableParams: () => dispatch(clearTableParams()),
 	clearCurrentBook: () => dispatch(clearCurrentBook()),
-	clearModalInfo: () => dispatch(clearModalInfo()),
 })
 
 export default connect(

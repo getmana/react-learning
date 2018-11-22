@@ -17,9 +17,10 @@ import {
 	addBookFailure,
 
 } from './index';
+import { openMessageModal, } from '../messageModal';
 import { apiService, } from '../../../services';
 import history from '../../routingHistory';
-import { FormRatingsArray, } from '../../../helpers';
+import { formRatingsArray, } from '../../../helpers';
 
 function* getBooksSaga(action) {
 	const { params, } = action.payload;
@@ -29,7 +30,7 @@ function* getBooksSaga(action) {
 		yield put(getBooksSuccess(res.data, res.headers['x-total-count']));
 	}
 	catch (error) {
-		yield put(getBooksFailure(error.message))
+		yield put(getBooksFailure())
 	}
 }
 
@@ -41,7 +42,7 @@ function* getCurrentBookSaga(action) {
 		yield put(getCurrentBookSuccess(res.data));
 	}
 	catch (error) {
-		yield put(getCurrentBookFailure(error.message))
+		yield put(getCurrentBookFailure());
 	}
 }
 
@@ -51,18 +52,18 @@ function* getLanguagesSaga() {
 		yield put(getLanguagesSuccess(res.data));
 	}
 	catch (error) {
-		yield put(getLanguagesFailure(error.message))
+		yield put(getLanguagesFailure())
 	}
 }
 
 function* getRatingsSaga() {
 	try {
 		const res = yield call(apiService, 'GET', '/ratings' );
-		const ratings = FormRatingsArray.formArray(res.data);
+		const ratings = formRatingsArray(res.data);
 		yield put(getRatingsSuccess(ratings));
 	}
 	catch (error) {
-		yield put(getRatingsFailure(error.message))
+		yield put(getRatingsFailure())
 	}
 }
 
@@ -75,7 +76,7 @@ function* editBookSaga(action) {
 		yield put(editBookSuccess(res.data));
 	}
 	catch (error) {
-		yield put(editBookFailure(error.message));
+		yield put(editBookFailure());
 	}
 }
 
@@ -85,11 +86,12 @@ function* deleteBookSaga(action) {
 
 	try {
 		yield call(apiService, 'DELETE', url);
-		// history.push('/books');
-		yield put(deleteBookSuccess('The book was successfully deleted'));
+		yield put(openMessageModal('The book was successfully deleted', 'Success'))
+		yield put(deleteBookSuccess());
+		history.push('/books');
 	}
 	catch (error) {
-		yield put(deleteBookFailure(error.message));
+		yield put(deleteBookFailure());
 	}
 }
 
@@ -100,10 +102,11 @@ function* addBookSaga(action) {
 		const res = yield call(apiService, 'POST', '/books', { data: bookData, });
 		const { id, } = res.data;
 		history.push(`/book/${id}`);
+		yield put(openMessageModal('The book was successfully added to the catalogue', 'Success'))
 		yield put(addBookSuccess(res.data))
 	}
 	catch (error) {
-		yield put(addBookFailure(error.message));
+		yield put(addBookFailure());
 	}
 }
 
