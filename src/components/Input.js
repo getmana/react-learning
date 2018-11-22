@@ -75,6 +75,7 @@ class Input extends Component {
 			currentValue,
 			onChange,
 			style,
+			readOnly,
 		} = this.props;
 		const { touched, error, warning, } = meta || {};
 
@@ -84,6 +85,7 @@ class Input extends Component {
 				<InputBox>
 					<InputElement
 						disabled={disabled}
+						readOnly={readOnly}
 						type={type}
 						value={currentValue}
 						placeholder={placeholder}

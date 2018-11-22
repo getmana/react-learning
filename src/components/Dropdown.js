@@ -15,7 +15,7 @@ const DropdownThemed = styled.div`
 	color: ${props => props.theme.primary};
 	position: relative;
 
-	.colored-disabled i {
+	.readonly-dropdown i {
 		display: none;
 	}
 `;
@@ -50,14 +50,18 @@ class Dropdown extends Component {
 		};
 
 	openDropdown = (coordinats) => {
-		this.setState({
-			isOpen: true,
-			portalStyle: {
-				...this.state.portalStyle,
-				top: coordinats.bottom + 5,
-				left: coordinats.left,
-			},
-		})
+		const { readOnly, } = this.props;
+
+		if (!readOnly) {
+			this.setState({
+				isOpen: true,
+				portalStyle: {
+					...this.state.portalStyle,
+					top: coordinats.bottom + 5,
+					left: coordinats.left,
+				},
+			})
+		}
 	}
 
 	closeDropdown = () => {
@@ -91,7 +95,7 @@ class Dropdown extends Component {
 	}
 
 	render() {
-		const { label, disabled, style, className, input, meta, } = this.props;
+		const { label, disabled, style, className, input, meta, readOnly, } = this.props;
 		const { touched, error, warning, } = meta || {};
 		const { isOpen, currentValue, portalStyle, currentList, } = this.state;
 		const openedIcon = 'keyboard_arrow_up';
@@ -105,6 +109,7 @@ class Dropdown extends Component {
 						value={currentValue}
 						type="text"
 						disabled={disabled}
+						readOnly={readOnly}
 						style={style}
 						onChange={this.handleChange}
 						onOpenDropdown={this.openDropdown}

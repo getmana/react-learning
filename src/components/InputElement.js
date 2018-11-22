@@ -7,6 +7,7 @@ const InputThemed = styled.input`
     outline: none;
     padding: 0.4em 1em;
     border-bottom: 2px solid ${props => props.disabled ? props.theme.unactive : props.theme.primary};
+	border: ${props => props.readOnly ? 'none' : ''};
     color: ${props => props.disabled ? props.theme.unactive : props.theme.primary};
     background-color: transparent;
     box-sizing: border-box;
@@ -27,11 +28,12 @@ class InputElement extends Component {
 	}
 
 	render() {
-		const { type, value, onChange, placeholder, disabled, style, } = this.props;
+		const { type, value, onChange, placeholder, disabled, readOnly, style, } = this.props;
 
 		return (
 			<InputThemed
 				disabled={disabled}
+				readOnly={readOnly}
 				type={type}
 				value={value}
 				placeholder={placeholder}
@@ -55,6 +57,8 @@ InputElement.propTypes = {
 	]),
 	placeholder: PropTypes.string,
 	style: PropTypes.objectOf(PropTypes.string),
+	disabled: PropTypes.bool,
+	readOnly: PropTypes.bool,
 }
 
 InputElement.defaultProps = {

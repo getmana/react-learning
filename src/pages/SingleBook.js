@@ -12,7 +12,7 @@ import {
 	clearCurrentBook,
 } from '../store/models/books';
 import { clearTableParams, } from '../store/models/tableFunctional';
-import styled, { withTheme, } from 'styled-components';
+import styled from 'styled-components';
 import { englishLetters, imageLinks, positiveNumbers, lessThenCurrent, wikiFormat, isOneOf, onlyInteger, required, } from '../helpers';
 import { PageTitle, Spinner, Input, Button, Form, Field, Dropdown, Portal, CenteredModal, DeleteBookModal, } from '../components';
 
@@ -43,8 +43,6 @@ const portalInitStyle = {
 	top: '30vh',
 	left: '30%',
 };
-
-@withTheme
 
 export class SingleBook extends Component {
 	state = {
@@ -108,7 +106,6 @@ export class SingleBook extends Component {
 			handleSubmit,
 			languages,
 			language,
-			theme,
 			ratings,
 			rating,
 			processingLanguages,
@@ -116,10 +113,6 @@ export class SingleBook extends Component {
 			editingMode,
 			title,
 		} = this.props;
-		const style = {
-			'color': `${theme.primary}`,
-			'border': 'none',
-		}
 		const { modalIsOpen, } = this.state;
 
 		return (
@@ -137,8 +130,7 @@ export class SingleBook extends Component {
 									type="text"
 									label="Book Title:"
 									validate={required}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 								/>
 								<Field
 									name="author"
@@ -146,8 +138,7 @@ export class SingleBook extends Component {
 									type="text"
 									label="Book Author:"
 									validate={[ englishLetters, required ]}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 								/>
 								<Field
 									name="country"
@@ -155,8 +146,7 @@ export class SingleBook extends Component {
 									type="text"
 									label="Country:"
 									validate={[ englishLetters, required ]}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 								/>
 								<Field
 									name="year"
@@ -164,8 +154,7 @@ export class SingleBook extends Component {
 									type="number"
 									label="Year:"
 									validate={[ lessThenCurrent, positiveNumbers, onlyInteger, required ]}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 								/>
 								<Field
 									name="language"
@@ -175,9 +164,8 @@ export class SingleBook extends Component {
 									list={languages}
 									defaultProp={language}
 									validate={required}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
-									className={!editingMode ? 'colored-disabled' : ''}
+									readOnly={!editingMode}
+									className={!editingMode ? 'readonly-dropdown' : ''}
 									normalize={isOneOf(languages)}
 									onSelect={this.selectVariant}
 								/>
@@ -189,9 +177,8 @@ export class SingleBook extends Component {
 									list={ratings}
 									defaultProp={rating}
 									validate={required}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
-									className={!editingMode ? 'colored-disabled' : ''}
+									readOnly={!editingMode}
+									className={!editingMode ? 'readonly-dropdown' : ''}
 									normalize={isOneOf(ratings)}
 									onSelect={this.selectVariant}
 								/>
@@ -201,16 +188,14 @@ export class SingleBook extends Component {
 									type="text"
 									label="Book Link:"
 									validate={wikiFormat}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 								/>
 								<Field
 									name="pages"
 									component={Input}
 									type="number"
 									label="Number of Pages:"
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 									validate={[ positiveNumbers, onlyInteger, required ]}
 								/>
 								<Field
@@ -219,8 +204,7 @@ export class SingleBook extends Component {
 									type="text"
 									label="Image Link:"
 									validate={[ imageLinks, required ]}
-									disabled={!editingMode}
-									style={!editingMode ? style : {}}
+									readOnly={!editingMode}
 								/>
 								{
 									editingMode &&
