@@ -20,10 +20,9 @@ export const loginSuccess = (username, userId, token) => ({
 	},
 })
 
-export const loginFailure = error => ({
+export const loginFailure = () => ({
 	type: types.LOGIN_FAILURE,
 	payload: {
-		error,
 		processing: false,
 	},
 })

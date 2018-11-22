@@ -1,6 +1,6 @@
 import { takeLatest, put, call, all, } from 'redux-saga/effects';
 import { loginSuccess, loginFailure, types, } from './index';
-import { clearModalInfo, } from '../books';
+import { openMessageModal, } from '../messageModal';
 import { apiService, localStorageService, } from '../../../services';
 import history from '../../routingHistory';
 
@@ -15,13 +15,13 @@ function* loginSaga(action) {
 
 	try {
 		const res = yield call(apiService, 'GET', '/auth', { params: data, });
-		yield put(clearModalInfo());
 		history.push('/account');
+		yield put(openMessageModal('Hello! Welcome to your account', 'Success'))
 		localStorageService.setLocalStorageItem('token', res.data.token);
 		yield put(loginSuccess(res.username, res.userId, res.token));
 	}
 	catch (error) {
-		yield put(loginFailure(error.message))
+		yield put(loginFailure())
 	}
 }
 

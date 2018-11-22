@@ -10,13 +10,11 @@ import {
 	deleteBookStart,
 	addBookStart,
 	clearCurrentBook,
-	clearModalInfo,
 } from '../store/models/books';
 import { clearTableParams, } from '../store/models/tableFunctional';
 import styled, { withTheme, } from 'styled-components';
-import history from '../store/routingHistory';
 import { englishLetters, imageLinks, positiveNumbers, lessThenCurrent, wikiFormat, isOneOf, onlyInteger, required, } from '../helpers';
-import { PageTitle, Spinner, Input, Button, Form, Field, Dropdown, Portal, CenteredModal, DeleteBookModal, MessageModal, } from '../components';
+import { PageTitle, Spinner, Input, Button, Form, Field, Dropdown, Portal, CenteredModal, DeleteBookModal, } from '../components';
 
 const PageThemed = styled.div`
 	padding: 20px;
@@ -63,7 +61,7 @@ export class SingleBook extends Component {
 			this.props.setEditingMode(true)
 		}
 		else {
-			this.props.getCurrentBookStart({ id, });
+			this.props.getCurrentBookStart(id);
 		}
 	}
 
@@ -90,7 +88,7 @@ export class SingleBook extends Component {
 		})
 	}
 
-	DeleteBook = () => {
+	deleteBook = () => {
 		const { id, } = this.props.match.params;
 		this.props.deleteBookStart(id);
 		this.setState({
@@ -102,16 +100,6 @@ export class SingleBook extends Component {
 		this.setState({
 			modalIsOpen: false,
 		})
-	}
-
-	closeMessageModal = () => {
-		const { modalMessage, } = this.props;
-		this.props.clearModalInfo();
-		this.props.clearTableParams();
-
-		if (modalMessage === 'The book was successfully deleted') {
-			history.push('/books')
-		}
 	}
 
 	render() {
@@ -127,8 +115,6 @@ export class SingleBook extends Component {
 			processingRatings,
 			editingMode,
 			title,
-			modalTitle,
-			modalMessage,
 		} = this.props;
 		const style = {
 			'color': `${theme.primary}`,
@@ -258,14 +244,11 @@ export class SingleBook extends Component {
 						<CenteredModal title="Delete Book">
 							<DeleteBookModal
 								bookTitle={title}
-								onDelete={this.DeleteBook}
+								onDelete={this.deleteBook}
 								onClose={this.closeModal}
 							/>
 						</CenteredModal>
 					</Portal>
-				)}
-				{modalMessage && (
-					<MessageModal title={modalTitle} info={modalMessage} onClose={this.closeMessageModal} />
 				)}
 			</PageThemed>
 		)
@@ -300,10 +283,7 @@ SingleBook.propTypes = {
 	title: PropTypes.string,
 	deleteBookStart: PropTypes.func.isRequired,
 	clearTableParams: PropTypes.func.isRequired,
-	modalMessage: PropTypes.string,
-	modalTitle: PropTypes.string,
 	clearCurrentBook: PropTypes.func.isRequired,
-	clearModalInfo: PropTypes.func.isRequired,
 }
 
 SingleBook.defaultProp = {
@@ -312,8 +292,6 @@ SingleBook.defaultProp = {
 	ratings: [],
 	rating: '',
 	title: '',
-	modalMessage: '',
-	modalTitle: '',
 }
 
 const SingleBookContainer = reduxForm({
@@ -368,17 +346,13 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	getCurrentBookStart: (params) => {
-		const { id, } = params;
-		dispatch(getCurrentBookStart(id))
-	},
+	getCurrentBookStart: (id) => dispatch(getCurrentBookStart(id)),
 	getLanguagesStart: () => dispatch(getLanguagesStart()),
 	getRatingsStart: () => dispatch(getRatingsStart()),
 	setEditingMode: (value) => dispatch(setEditingMode(value)),
 	deleteBookStart: (id) => dispatch(deleteBookStart(id)),
 	clearTableParams: () => dispatch(clearTableParams()),
 	clearCurrentBook: () => dispatch(clearCurrentBook()),
-	clearModalInfo: () => dispatch(clearModalInfo()),
 })
 
 export default connect(

@@ -17,10 +17,9 @@ export const getBooksSuccess = (books, numberOfBooks) => ({
 	},
 })
 
-export const getBooksFailure = error => ({
+export const getBooksFailure = () => ({
 	type: types.GET_BOOKS_FAILURE,
 	payload: {
-		error,
 		processing: false,
 	},
 })
@@ -41,11 +40,9 @@ export const getCurrentBookSuccess = (currentBook) => ({
 	},
 })
 
-export const getCurrentBookFailure = error => ({
+export const getCurrentBookFailure = () => ({
 	type: types.GET_CURRENT_BOOK_FAILURE,
 	payload: {
-		modalMessage: error,
-		modalTitle: 'Error',
 		processing: false,
 	},
 })
@@ -65,11 +62,9 @@ export const getLanguagesSuccess = (languages) => ({
 	},
 })
 
-export const getLanguagesFailure = (error) => ({
+export const getLanguagesFailure = () => ({
 	type: types.GET_LANGUAGES_SUCCESS,
 	payload: {
-		modalMessage: error,
-		modalTitle: 'Error',
 		processingLanguages: false,
 	},
 })
@@ -89,11 +84,9 @@ export const getRatingsSuccess = (ratings) => ({
 	},
 })
 
-export const getRatingsFailure = (error) => ({
+export const getRatingsFailure = () => ({
 	type: types.GET_RATINGS_SUCCESS,
 	payload: {
-		modalMessage: error,
-		modalTitle: 'Error',
 		processingRatings: false,
 	},
 })
@@ -115,11 +108,9 @@ export const editBookSuccess = (currentBook) => ({
 	},
 })
 
-export const editBookFailure = error => ({
+export const editBookFailure = () => ({
 	type: types.EDIT_BOOK_FAILURE,
 	payload: {
-		modalMessage: error,
-		modalTitle: 'Error',
 		processing: false,
 	},
 })
@@ -139,20 +130,16 @@ export const deleteBookStart = id => ({
 	},
 })
 
-export const deleteBookSuccess = modalMessage => ({
+export const deleteBookSuccess = () => ({
 	type: types.DELETE_BOOK_SUCCESS,
 	payload: {
-		modalMessage,
-		modalTitle: 'Success',
 		processing: false,
 	},
 })
 
-export const deleteBookFailure = error => ({
+export const deleteBookFailure = () => ({
 	type: types.DELETE_BOOK_FAILURE,
 	payload: {
-		modalMessage: error,
-		modalTitle: 'Error',
 		processing: false,
 	},
 })
@@ -170,16 +157,12 @@ export const addBookSuccess = currentBook => ({
 	payload: {
 		currentBook,
 		processing: false,
-		modalMessage: 'The book was successfully added to the catalogue',
-		modalTitle: 'Success',
 	},
 })
 
-export const addBookFailure = error => ({
+export const addBookFailure = () => ({
 	type: types.ADD_BOOK_FAILURE,
 	payload: {
-		modalMessage: error,
-		modalTitle: 'Error',
 		processing: false,
 	},
 })
@@ -188,13 +171,5 @@ export const clearCurrentBook = () => ({
 	type: types.CLEAR_CURRENT_BOOK,
 	payload: {
 		currentBook: {},
-	},
-})
-
-export const clearModalInfo = () => ({
-	type: types.CLEAR_MODAL_INFO,
-	payload: {
-		modalTitle: '',
-		modalMessage: '',
 	},
 })

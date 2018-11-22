@@ -1,7 +1,7 @@
 import React, { Component, Fragment, } from 'react';
 import { connect, } from 'react-redux';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import debounce from 'lodash/debounce';
 import { getBooksStart, } from '../store/models/books';
 import { clearTableParams, sortItems, } from '../store/models/tableFunctional';
 import history from '../store/routingHistory';
@@ -25,13 +25,12 @@ export class Books extends Component {
 			columns: [ 'author', 'title', 'year', 'rating' ],
 			title: '',
 		};
-		this.delayedRequest = _.debounce(this.searchBookRequest, 1000);
 	}
 
 	componentDidMount() {
 		const { _limit, } = this.state;
 		this.props.clearTableParams();
-		history.push('/books');
+		// history.push('/books');
 		this.props.getBooksStart({ _limit, });
 	}
 
@@ -71,12 +70,14 @@ export class Books extends Component {
 		history.push(`/book/${id}`)
 	}
 
-	searchBookRequest = (e) => {
-		const { _limit, } = this.state;
+	searchBookRequest = () => {
+		const { _limit, title, } = this.state;
 		this.props.clearTableParams();
-		const search = e.target.value;
-		history.push(`/search/${search}`)
-		this.getBooks({ q: search, _limit, })
+
+		if (title.length >= 3) {
+			history.push(`/search/${title}`)
+			this.getBooks({ q: title, _limit, })
+		}
 	}
 
 	handleChange = (e) => {
@@ -86,9 +87,11 @@ export class Books extends Component {
 		})
 
 		if (e.target.value.length >= 3) {
-			this.delayedRequest(e);
+			this.delayedRequest();
 		}
 	}
+
+	delayedRequest = debounce(this.searchBookRequest, 1000);
 
 	addBook = () => {
 		history.push('/book/add')

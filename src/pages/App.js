@@ -1,9 +1,12 @@
 import React, { Component, } from 'react';
-import { Link, Route, Switch, } from 'react-router-dom';
+import { Link, Route, Switch, withRouter, } from 'react-router-dom';
+import { connect, } from 'react-redux';
+import PropTypes from 'prop-types';
 import styled, { ThemeProvider, } from 'styled-components';
+import { closeMessageModal, } from '../store/models/messageModal';
 import Logo from '../images/react-logo.png';
 import { themeIndigo, themeOrange, } from '../configs/themes';
-import { Header, Footer, MainSection, Portal, SelectThemeModal, Sidebar, CenteredModal, } from '../components';
+import { Header, Footer, MainSection, Portal, SelectThemeModal, Sidebar, CenteredModal, MessageModal, } from '../components';
 import HomePage from './HomePage';
 import Login from './Login';
 import Account from './Account';
@@ -53,7 +56,7 @@ const portalInitStyle = {
 	left: '30%',
 };
 
-class App extends Component {
+export class App extends Component {
 	state = {
 		modalIsOpen: false,
 		themeName: themeOrange,
@@ -83,8 +86,13 @@ class App extends Component {
 		})
 	}
 
+	closeMessageModal = () => {
+		this.props.closeMessageModal();
+	}
+
 	render() {
 		const { modalIsOpen, themeName, style, } = this.state;
+		const { message, title, } = this.props;
 
 		return (
 			<ThemeProvider theme={themeName}>
@@ -121,10 +129,38 @@ class App extends Component {
 							</CenteredModal>
 						</Portal>
 					)}
+					{message && (
+						<MessageModal title={title} info={message} onClose={this.closeMessageModal} />
+					)}
 				</Page>
 			</ThemeProvider>
 		)
 	}
 }
 
-export default App;
+// export default App;
+App.propTypes = {
+	message: PropTypes.string,
+	title: PropTypes.string,
+	closeMessageModal: PropTypes.func.isRequired,
+}
+App.defaultProps = {
+	message: '',
+	title: '',
+}
+
+const mapStateToProps = (state) => {
+	return ({
+		message: state.messageModal.message,
+		title: state.messageModal.title,
+	})
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	closeMessageModal: () => dispatch(closeMessageModal()),
+})
+
+export default withRouter(connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(App));

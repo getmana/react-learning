@@ -22,7 +22,7 @@
       "title": "Fairy tales",
       "year": 1836,
       "id": 2,
-      "rating": 3
+      "rating": 4
     },
     {
       "author": "Dante Alighieri",
@@ -34,7 +34,7 @@
       "title": "The Divine Comedy",
       "year": 1315,
       "id": 3,
-      "rating": 3
+      "rating": 2
     },
     {
       "author": "Unknown",
@@ -178,7 +178,7 @@
       "title": "Don Quijote De La Mancha",
       "year": 1610,
       "id": 17,
-      "rating": 4
+      "rating": 2
     },
     {
       "author": "Geoffrey Chaucer",
@@ -682,7 +682,7 @@
       "title": "Moby Dick",
       "year": 1851,
       "id": 63,
-      "rating": 1
+      "rating": 5
     },
     {
       "author": "Michel de Montaigne",
@@ -1115,38 +1115,6 @@
       "rating": 1,
       "imageLink": "images/fairy-tales.png",
       "id": 102
-    },
-    {
-      "title": "Gkjlj Test jj",
-      "author": "fdgstrywa",
-      "country": "gthyrtywr",
-      "year": "1250",
-      "language": "Italian",
-      "rating": 5,
-      "pages": "85",
-      "imageLink": "stgaet.png",
-      "id": 104
-    },
-    {
-      "title": "cgds",
-      "author": "dfff",
-      "country": "dfgda",
-      "year": "33",
-      "pages": "5",
-      "imageLink": "fg.jpg",
-      "language": "Italian",
-      "id": 105
-    },
-    {
-      "title": "g",
-      "author": "tgyer",
-      "country": "ert",
-      "year": "543",
-      "language": "Danish",
-      "rating": 4,
-      "pages": "5",
-      "imageLink": "rtw.jpg",
-      "id": 107
     }
   ],
   "languages": [

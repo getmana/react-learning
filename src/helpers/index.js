@@ -12,5 +12,5 @@ export {
 	wikiFormat,
 	isOneOf,
 	onlyInteger
-} from './FieldValidation';
-export { default as FormRatingsArray } from './FormRatingsArray';
+} from './fieldValidation';
+export { default as formRatingsArray } from './formRatingsArray';
