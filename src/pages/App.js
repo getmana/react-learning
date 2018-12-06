@@ -12,6 +12,7 @@ import Login from './Login';
 import Account from './Account';
 import Books from './Books';
 import SingleBook from './SingleBook';
+import BuyBooks from './BuyBooks';
 
 const Page = styled.div`
 	display: flex;
@@ -113,6 +114,7 @@ export class App extends Component {
 							<Route path="/search/:params" component={Books} />
 							<Route path="/books" component={Books} />
 							<Route path="/book/:id" component={SingleBook} />
+							<Route path="/buy-books" component={BuyBooks} />
 						</Switch>
 					</MainSection>
 					<Footer>

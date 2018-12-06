@@ -42,12 +42,20 @@ const ErrorMessage = styled.div`
 `;
 
 class Dropdown extends Component {
-		state = {
-			currentValue: this.props.defaultProp,
-			isOpen: false,
-			portalStyle: portalInitStyle,
-			currentList: this.props.list,
-		};
+	state = {
+		currentValue: this.props.defaultProp,
+		isOpen: false,
+		portalStyle: portalInitStyle,
+		currentList: this.props.list,
+	};
+
+	componentDidUpdate(prevProps) {
+		if (this.props.list !== prevProps.list) {
+			this.setState({
+				currentList: this.props.list,
+			})
+		}
+	}
 
 	openDropdown = (coordinats) => {
 		const { readOnly, } = this.props;

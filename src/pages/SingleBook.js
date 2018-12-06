@@ -67,8 +67,9 @@ export class SingleBook extends Component {
 		this.props.setEditingMode(false);
 	}
 
-	selectVariant = (param, formName) => {
-		this.props.change(formName, param)
+	selectVariant = (param, fieldName) => {
+		console.log('fieldName', fieldName)
+		this.props.change(fieldName, param)
 	}
 
 	handleClickEdit = () => {

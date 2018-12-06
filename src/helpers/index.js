@@ -11,6 +11,11 @@ export {
 	lessThenCurrent,
 	wikiFormat,
 	isOneOf,
-	onlyInteger
+	onlyInteger,
+	sixteenDigits,
+	threeDigits,
+	moreThanThreeLetters,
+	formatDate,
+	validDate
 } from './fieldValidation';
 export { default as formRatingsArray } from './formRatingsArray';

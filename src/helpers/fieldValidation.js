@@ -7,6 +7,21 @@ const emailValue = value =>
 
 const numberLength = (value = '') => (value.length < 7 ? 'Phone number is incorrect' : undefined);
 
+const sixteenDigits = value =>
+	value && value.length !== 16
+		? 'Card Number should be 16 digits length'
+		: undefined
+
+const threeDigits = value =>
+	value && value.length !== 3
+		? 'CVC should be 3 digits length'
+		: undefined
+
+const moreThanThreeLetters = value =>
+	value && value.length <= 3
+		? 'The length should be more than 3 letters'
+		: undefined
+
 const englishLetters = value =>
 	value && !/^[a-zA-Z,\s]*$/.test(value)
 		? 'English Letters Only!'
@@ -59,15 +74,30 @@ const formatPhone = value => {
 		return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3)}`
 	}
 
-	return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 5)}-${onlyNums.slice(
-		5,
-		7
-	)}`
+	return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 5)}-${onlyNums.slice(5, 7)}`
 }
 
 const parsePhone = value => {
 	return value ? value.replace( /-/g, '') : '';
 }
+
+const formatDate = value => {
+	if (!value) {
+		return ''
+	}
+	const onlyNums = value.replace(/[^\d]/g, '')
+
+	if (onlyNums.length <= 2) {
+		return onlyNums
+	}
+
+	return `${onlyNums.slice(0, 2)}/${onlyNums.slice(2, 4)}`
+}
+
+const validDate = value =>
+	value && +value.slice(0, 2) <= 31 && +value.slice(3, 5) <= 12
+		? undefined
+		: 'The date is incorrect'
 
 export {
 	required,
@@ -81,5 +111,10 @@ export {
 	lessThenCurrent,
 	wikiFormat,
 	isOneOf,
-	onlyInteger
+	onlyInteger,
+	sixteenDigits,
+	threeDigits,
+	moreThanThreeLetters,
+	formatDate,
+	validDate
 };

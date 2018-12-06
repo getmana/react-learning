@@ -173,3 +173,25 @@ export const clearCurrentBook = () => ({
 		currentBook: {},
 	},
 })
+
+export const buyBooksStart = buyBooksData => ({
+	type: types.BUY_BOOKS_START,
+	payload: {
+		processing: true,
+		buyBooksData,
+	},
+})
+
+export const buyBooksSuccess = () => ({
+	type: types.BUY_BOOKS_SUCCESS,
+	payload: {
+		processing: false,
+	},
+})
+
+export const buyBooksFailure = () => ({
+	type: types.BUY_BOOKS_FAILURE,
+	payload: {
+		processing: false,
+	},
+})
