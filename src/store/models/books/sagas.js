@@ -15,6 +15,8 @@ import {
 	deleteBookFailure,
 	addBookSuccess,
 	addBookFailure,
+	buyBooksSuccess,
+	buyBooksFailure,
 
 } from './index';
 import { openMessageModal, } from '../messageModal';
@@ -110,6 +112,21 @@ function* addBookSaga(action) {
 	}
 }
 
+function* buyBooksSaga(action) {
+	const { buyBooksData, } = action.payload;
+	console.log('saga buyBooksData', buyBooksData);
+
+	try {
+		yield call(apiService, 'POST', '/buy_books', { data: buyBooksData, });
+		yield put(openMessageModal('Congratulations! You have successfully bought the books!', 'Success'))
+		yield put(buyBooksSuccess());
+		history.push('/account');
+	}
+	catch (error) {
+		yield put(buyBooksFailure())
+	}
+}
+
 function* watchGetBooksSaga() {
 	yield all([
 		takeLatest(types.GET_BOOKS_START, getBooksSaga),
@@ -119,6 +136,7 @@ function* watchGetBooksSaga() {
 		takeLatest(types.DELETE_BOOK_START, deleteBookSaga),
 		takeLatest(types.ADD_BOOK_START, addBookSaga),
 		takeLatest(types.GET_CURRENT_BOOK_START, getCurrentBookSaga),
+		takeLatest(types.BUY_BOOKS_START, buyBooksSaga)
 	]);
 }
 

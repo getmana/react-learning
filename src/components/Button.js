@@ -5,18 +5,18 @@ import Spinner from './Spinner';
 
 const ButtonBox = styled.div`
     position: relative;
-    width: 100%;
-    padding: 10px;
+    width: ${props => props.iconButton ? '' : '100%'};
+    padding: ${props => props.iconButton ? '15px 10px' : '10px'};
     box-sizing: border-box;
 `;
 
 const ButtonThemed = styled.button`
 	background: transparent;
-	border-radius: 3px;
-    padding: 0.4em 1em;
+	border-radius: ${props => props.iconButton ? '50%' : '3px'};
+    padding: ${props => props.iconButton ? '0.4em 0' : '0.4em 1em'}; 
 	color: ${props => props.disabled ? props.theme.unactive : props.theme[`${props.styles}`]};
     border: 2px solid ${props => props.disabled ? props.theme.unactive : props.theme[`${props.styles}`]};
-    width: 100%;
+    width: ${props => props.iconButton ? '42px' : '100%'};
     outline: none;
 
     :hover {
@@ -37,10 +37,11 @@ const SpinnerBox = styled.div`
       margin: 0 10px;
 `;
 
-const Button = ({ children, style, type, loading, onClick, disabled, }) => {
+const Button = ({ children, style, type, loading, onClick, disabled, iconButton, }) => {
 	return (
-		<ButtonBox>
+		<ButtonBox iconButton={iconButton}>
 			<ButtonThemed
+				iconButton={iconButton}
 				type={type}
 				styles={style}
 				disabled={disabled}
@@ -65,7 +66,11 @@ Button.propTypes = {
 	onClick: PropTypes.func,
 	loading: PropTypes.bool,
 	disabled: PropTypes.bool,
-	children: PropTypes.string,
+	children: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.object,
+	]),
+	iconButton: PropTypes.bool,
 }
 Button.defaultProps = {
 	type: 'button',

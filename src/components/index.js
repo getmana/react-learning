@@ -19,4 +19,6 @@ export { default as TableFunctional } from './TableFunctional';
 export { default as CenteredModal } from './CenteredModal';
 export { default as DeleteBookModal } from './DeleteBookModal';
 export { default as MessageModal } from './MessageModal';
+export { default as BuyBooksFirstPage } from './BuyBooksFirstPage';
+export { default as BuyBooksSecondPage } from './BuyBooksSecondPage';
 export { Form, Field } from 'redux-form';

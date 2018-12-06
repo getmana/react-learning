@@ -10,7 +10,7 @@
       "title": "Things Fall Apart",
       "year": 1958,
       "id": 1,
-      "rating": 4
+      "rating": 2
     },
     {
       "author": "Hans Christian Andersen",
@@ -20,9 +20,9 @@
       "link": "https://en.wikipedia.org/wiki/Fairy_Tales_Told_for_Children._First_Collection.",
       "pages": "785",
       "title": "Fairy tales",
-      "year": 1836,
+      "year": "1834",
       "id": 2,
-      "rating": 4
+      "rating": 3
     },
     {
       "author": "Dante Alighieri",
@@ -178,7 +178,7 @@
       "title": "Don Quijote De La Mancha",
       "year": 1610,
       "id": 17,
-      "rating": 2
+      "rating": 4
     },
     {
       "author": "Geoffrey Chaucer",
