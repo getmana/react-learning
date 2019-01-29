@@ -1,9 +1,10 @@
 import React, { Component, } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { getBooksStart, } from '../store/models/books';
 import { Field, reduxForm, FieldArray, } from 'redux-form';
 import { connect, formValueSelector, } from '../decorators';
 import { Dropdown, Button, Form, Input, } from '../components';
-import { isOneOf, required, } from '../helpers';
 
 const FormBox = styled.div`
 	padding: 20px;
@@ -15,15 +16,16 @@ const LiThemed = styled.li`
 	justify-content: space-between;
 `;
 
-const renderBooks = ({ fields, meta: { error, submitFailed, }, bookTitle, list, onChange, }) => (
+const renderBooks = ({ fields, meta: { error, submitFailed, }, bookTitle, onChange, resultList, updateList, }) => (
 	<ul>
 		<li>
 			<Button
 				style="primary"
-				disabled={list.length === 0 || !bookTitle}
+				disabled={!bookTitle || resultList.indexOf(bookTitle) === -1}
 				onClick={() => {
 					fields.push(bookTitle);
-					onChange('bookTitle', '')
+					onChange('bookTitle', '');
+					updateList();
 				}}
 			>
 				Add Book
@@ -43,7 +45,10 @@ const renderBooks = ({ fields, meta: { error, submitFailed, }, bookTitle, list, 
 				<Button
 					iconButton
 					style="primary"
-					onClick={() => fields.remove(index)}
+					onClick={() => {
+						fields.remove(index);
+						updateList();
+					}}
 				>
 					<i className="material-icons">delete</i>
 				</Button>
@@ -52,53 +57,74 @@ const renderBooks = ({ fields, meta: { error, submitFailed, }, bookTitle, list, 
 	</ul>
 )
 
+renderBooks.propTypes = {
+	bookTitle: PropTypes.string,
+	onChange: PropTypes.func,
+	fields: PropTypes.object,
+	meta: PropTypes.shape({
+		error: PropTypes.string,
+		submitFailed: PropTypes.bool,
+	}),
+	resultList: PropTypes.arrayOf(PropTypes.string),
+	updateList: PropTypes.func,
+}
+
 export class BuyBooksFirstPage extends Component {
 	state = {
 		resultList: [],
-		filteredList: this.props.list,
 	}
 
 	componentDidMount() {
-		this.filterList();
+		this.formInitList();
 	}
 
 	componentDidUpdate(prevProps) {
-		const { bookTitle, addedBooks, } = this.props;
-		const { filteredList, } = this.state;
+		const { books, addedBooks, } = this.props;
 
-		if (addedBooks !== prevProps.addedBooks && Array.isArray(addedBooks)) {
-			let resultList = [];
-			addedBooks.forEach((book) => {
-				resultList = filteredList.filter((item) => {
-					return item !== book;
+		if (books !== prevProps.books && Array.isArray(books)) {
+			let resultList = [], filteredList = [];
+			books.forEach((book) => {
+				resultList.push(book.title)
+			})
+
+			if (addedBooks && addedBooks.length > 0) {
+				filteredList = resultList.filter((book) => {
+					return addedBooks.indexOf(book) === -1
 				})
-			})
-			this.setState({
-				filteredList: resultList,
-			})
-		}
+			}
 
-		if (bookTitle !== prevProps.bookTitle) {
-			this.filterList(bookTitle);
+			const list = addedBooks ? filteredList : resultList;
+
+			this.setState({
+				resultList: list.slice(0, 7),
+			})
 		}
 	}
 
-	filterList = (bookTitle) => {
-		const { addedBooks, } = this.props;
-		const { filteredList, } = this.state;
-		console.log('addedBooks', addedBooks)
-		let result = filteredList;
+	formInitList = () => {
+		const { books, } = this.props;
 
-		if (bookTitle) {
-			let filter = bookTitle.toLowerCase();
-			result = filteredList.filter((item) => {
-				return item.toLowerCase().indexOf(filter) === 0;
+		if (books && books.length > 0) {
+			let resultList = books.map((book) => {
+				return book.title;
+			}).slice(0, 7);
+			this.setState({
+				resultList,
 			})
 		}
+	}
 
-		this.setState({
-			resultList: result.slice(0, 7),
-		})
+	handleChange = (e) => {
+		if (e.target.value.length >= 3) {
+			this.searchBooks(e.target.value);
+		}
+		else if (e.target.value.length === 0) {
+			this.props.getBooksStart();
+		}
+	}
+
+	searchBooks = (title) => {
+		this.props.getBooksStart({ q: title, _limit: 7, });
 	}
 
 	selectVariant = (param, fieldName) => {
@@ -116,17 +142,36 @@ export class BuyBooksFirstPage extends Component {
 						name="bookTitle"
 						component={Dropdown}
 						type="text"
-						label="Select Book:"
+						label="Search the Book:"
 						list={resultList}
 						defaultProp={bookTitle}
 						onSelect={this.selectVariant}
+						onChange={this.handleChange}
 					/>
-					<FieldArray name="books" bookTitle={bookTitle} list={resultList} component={renderBooks} onChange={this.props.change} />
+					<FieldArray
+						name="books"
+						bookTitle={bookTitle}
+						component={renderBooks}
+						resultList={resultList}
+						updateList={this.props.getBooksStart}
+						onChange={this.props.change}
+						onDelete={this.deleteFromAdded}
+					/>
 					<Button style="primary" disabled={!Array.isArray(addedBooks)} type="submit">Next</Button>
 				</Form>
 			</FormBox>
 		)
 	}
+}
+
+BuyBooksFirstPage.propTypes = {
+	handleSubmit: PropTypes.func.isRequired,
+	change: PropTypes.func.isRequired,
+	addedBooks: PropTypes.arrayOf(PropTypes.string),
+	bookTitle: PropTypes.string,
+	getBooksStart: PropTypes.func.isRequired,
+	initList: PropTypes.arrayOf(PropTypes.string),
+	books: PropTypes.arrayOf(PropTypes.object),
 }
 
 const FirstPageContainer = reduxForm({
@@ -144,9 +189,15 @@ const mapStateToProps = (state) => {
 	return ({
 		bookTitle,
 		addedBooks,
+		books: state.books.books,
 	})
 }
 
+const mapDispatchToProps = (dispatch) => ({
+	getBooksStart: (params) => dispatch(getBooksStart(params)),
+})
+
 export default connect(
 	mapStateToProps,
+	mapDispatchToProps,
 )(FirstPageContainer);

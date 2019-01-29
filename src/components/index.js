@@ -21,4 +21,5 @@ export { default as DeleteBookModal } from './DeleteBookModal';
 export { default as MessageModal } from './MessageModal';
 export { default as BuyBooksFirstPage } from './BuyBooksFirstPage';
 export { default as BuyBooksSecondPage } from './BuyBooksSecondPage';
+export { default as CardFieldDuplicate } from './CardFieldDuplicate';
 export { Form, Field } from 'redux-form';

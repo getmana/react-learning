@@ -27,12 +27,10 @@ const apiService = (method, url, requestData) => {
 			message = 'Please, sign in to your account'
 			history.push('/login')
 		}
-
-		if (error.response.status === 403) {
+		else if (error.response.status === 403) {
 			message = 'The login or the password is incorrect'
 		}
-
-		if (typeof error.response.data === 'object' && Object.keys(error.response.data).length === 0) {
+		else if (typeof error.response.data === 'object' && Object.keys(error.response.data).length === 0) {
 			message = 'Ooops... Something went wrong... Please, try later.'
 		}
 		else {

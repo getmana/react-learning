@@ -13,28 +13,10 @@ const PageThemed = styled.div`
 export class BuyBooks extends Component {
 	state = {
 		page: 1,
-		list: [],
 	}
 
 	componentDidMount() {
 		this.props.getBooksStart();
-	}
-
-	componentDidUpdate(prevProps) {
-		const { books, } = this.props;
-
-		if (books !== prevProps.books && books.length > 0) {
-			this.formTitlesList(books);
-		}
-	}
-
-	formTitlesList = (books) => {
-		let list = books.map((book) => {
-			return book.title;
-		});
-		this.setState({
-			list,
-		})
 	}
 
 	nextPage = () => {
@@ -50,16 +32,15 @@ export class BuyBooks extends Component {
 	}
 
 	render() {
-		const { page, list, } = this.state;
-		//const { handleSubmit, } = this.props;
+		const { page, } = this.state;
 		const { books, } = this.props;
 
 		return (
 			<PageThemed>
 				<PageTitle>Buy Books Page</PageTitle>
 				{
-					page === 1 && list.length > 0 &&
-						<BuyBooksFirstPage list={list} onSubmit={this.nextPage} />
+					page === 1 &&
+						<BuyBooksFirstPage onSubmit={this.nextPage} />
 				}
 				{
 					page === 2 &&
@@ -94,5 +75,3 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps,
 )(BuyBooks);
-
-// onSubmit={handleSubmit}

@@ -16,6 +16,12 @@ export {
 	threeDigits,
 	moreThanThreeLetters,
 	formatDate,
-	validDate
+	validDate,
+	formatCardNumber,
+	parseCardNumber,
+	formatCVC,
+	parseCVC,
+	parseDate,
+	validate
 } from './fieldValidation';
 export { default as formRatingsArray } from './formRatingsArray';
