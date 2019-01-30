@@ -27,11 +27,17 @@ const apiService = (method, url, requestData) => {
 			message = 'Please, sign in to your account'
 			history.push('/login')
 		}
-
-		if (error.response.status === 403) {
+		else if (error.response.status === 403) {
 			message = 'The login or the password is incorrect'
 		}
-		store.dispatch(openMessageModal(message || error.response.data, 'Error'))
+		else if (typeof error.response.data === 'object' && Object.keys(error.response.data).length === 0) {
+			message = 'Ooops... Something went wrong... Please, try later.'
+		}
+		else {
+			message = error.response.data
+		}
+		console.log('error apiService', error.response.data)
+		store.dispatch(openMessageModal(message, 'Error'))
 		throw new Error(error.response.data);
 	})
 }

@@ -28,7 +28,7 @@ class InputElement extends Component {
 	}
 
 	render() {
-		const { type, value, onChange, placeholder, disabled, readOnly, style, } = this.props;
+		const { type, value, onChange, placeholder, disabled, readOnly, style, onFocus, onBlur, } = this.props;
 
 		return (
 			<InputThemed
@@ -40,6 +40,8 @@ class InputElement extends Component {
 				style={style}
 				onChange={onChange}
 				onClick={this.handleClick}
+				onFocus={onFocus}
+				onBlur={onBlur}
 			/>
 		)
 	}
@@ -59,6 +61,8 @@ InputElement.propTypes = {
 	style: PropTypes.objectOf(PropTypes.string),
 	disabled: PropTypes.bool,
 	readOnly: PropTypes.bool,
+	onFocus: PropTypes.func,
+	onBlur: PropTypes.func,
 }
 
 InputElement.defaultProps = {

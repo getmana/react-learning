@@ -58,6 +58,9 @@ class Sidebar extends Component {
 					<LiThemed>
 						<Link to="/books">Books</Link>
 					</LiThemed>
+					<LiThemed>
+						<Link to="/buy-books">Buy Books</Link>
+					</LiThemed>
 				</ul>
 				<Title>Nice Buttons</Title>
 				<Button>I'm Default Button</Button>
