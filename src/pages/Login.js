@@ -13,9 +13,6 @@ const FormBox = styled.div`
 	max-width: 300px;
 `;
 
-// @reduxForm({
-// 	form: 'loginForm',
-// })
 export class Login extends Component {
 	state = {
 		isPhone: true,
@@ -96,6 +93,7 @@ Login.propTypes = {
 	handleSubmit: PropTypes.func,
 	processing: PropTypes.bool.isRequired,
 	password: PropTypes.string,
+	change: PropTypes.func,
 }
 
 const LoginContainer = reduxForm({

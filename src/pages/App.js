@@ -140,7 +140,6 @@ export class App extends Component {
 	}
 }
 
-// export default App;
 App.propTypes = {
 	message: PropTypes.string,
 	title: PropTypes.string,

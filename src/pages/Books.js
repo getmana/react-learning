@@ -30,7 +30,6 @@ export class Books extends Component {
 	componentDidMount() {
 		const { _limit, } = this.state;
 		this.props.clearTableParams();
-		// history.push('/books');
 		this.props.getBooksStart({ _limit, });
 	}
 
@@ -141,7 +140,7 @@ export class Books extends Component {
 									/>
 							}
 
-						</Fragment>
+        </Fragment>
 				}
 			</PageThemed>
 		)
