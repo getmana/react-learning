@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const LabelThemed = styled.label`
-    color: ${props => props.disabled ? props.theme.unactive : props.theme.primary};
+  color: ${props => props.disabled ? props.theme.unactive : props.theme.primary};
 `;
 
 const Label = ({ label, disabled, style, }) => {

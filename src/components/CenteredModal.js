@@ -3,26 +3,25 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const ModalThemed = styled.div`
-    height: 100%;
-    text-align: center;
-    
-    border: 2px solid ${props => props.theme.primary};
-    background-color: ${props => props.theme.secondaryBg};
+	height: 100%;
+	text-align: center;
+	border: 2px solid ${props => props.theme.primary};
+	background-color: ${props => props.theme.secondaryBg};
 `;
 
 const ModalTitle = styled.div`
-    color: #fff;
-    background-color: ${props => props.theme.primary};
-    padding: 10px;
+	color: #fff;
+	background-color: ${props => props.theme.primary};
+	padding: 10px;
 `;
 
 const ModalContent = styled.div`
-    display: flex;
-    height: 100%;
-    padding: 0 20%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+	display: flex;
+	height: 100%;
+	padding: 0 20%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
 `;
 
 const CenteredModal = ({ children, title, }) => {

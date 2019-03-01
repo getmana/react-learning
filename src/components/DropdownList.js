@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import DropdownListItem from './DropdownListItem';
 
 const ListThemed = styled.ul`
-    display: flex;
-    flex-direction: column;
-    border: 2px solid ${props => props.theme.primary};
-    color: ${props => props.theme.primary};
-    background-color: ${props => props.theme.secondaryBg};
+	display: flex;
+	flex-direction: column;
+	border: 2px solid ${props => props.theme.primary};
+	color: ${props => props.theme.primary};
+	background-color: ${props => props.theme.secondaryBg};
 `;
 
 const DropdownList = ({ list, onSelectVariant, }) => {

@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const SpanThemed = styled.span`
-    color: grey;
+	color: grey;
 
-    .active {
-        color: #fff;
-    }
+	.active {
+			color: #fff;
+	}
 `;
 
 const CardFieldDuplicate = ({ className, value, active, }) => {

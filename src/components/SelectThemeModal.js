@@ -5,8 +5,8 @@ import { themeIndigo, themeOrange, } from '../configs/themes';
 import Button from './Button';
 
 const LabelThemed = styled.label`
-    padding: 0 20px;
-    cursor: pointer;
+	padding: 0 20px;
+	cursor: pointer;
 `;
 
 const SelectThemeModal = ({ theme, selectTheme, onClose, }) => {

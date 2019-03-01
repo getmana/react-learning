@@ -23,14 +23,14 @@ const Page = styled.div`
 `;
 
 const HeaderTitle = styled.h1`
-    font-size: 36px;
-    padding-top: 5px;
+	font-size: 36px;
+	padding-top: 5px;
 `;
 
 const LogoImage = styled.img`
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
 `;
 
 const LinkBox = styled.div`

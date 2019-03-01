@@ -34,8 +34,8 @@ const CardContainer = styled.div`
 
 	.cardNumberDuplicate {
 		font-size: 26px;
-    	padding-top: 100px;
-    	text-align: center;
+		padding-top: 100px;
+		text-align: center;
 	}
 
 	.cardNameDuplicate {

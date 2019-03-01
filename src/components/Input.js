@@ -78,7 +78,6 @@ class Input extends Component {
 			readOnly,
 		} = this.props;
 		const { touched, error, warning, } = meta || {};
-		//console.log('meta', meta)
 
 		return (
 			<InputComponent disabled={disabled}>

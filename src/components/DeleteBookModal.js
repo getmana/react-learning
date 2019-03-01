@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 
 const ButtonBox = styled.div`
-    display: flex;
+  display: flex;
 	width: 100%;
 	justify-content: space-around;
 
@@ -14,8 +14,8 @@ const ButtonBox = styled.div`
 `;
 
 const TitleThemed = styled.h3`
-    color: ${props => props.theme.primary};
-    font-size: 22px;
+	color: ${props => props.theme.primary};
+	font-size: 22px;
 `;
 
 const DeleteBookModal = ({ onDelete, onClose, bookTitle, }) => {

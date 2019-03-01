@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const FooterThemed = styled.footer`
-    padding: 1vh 0;
-    color: #fff;
-    background-color: ${props => props.theme.primary};
-    text-align: center;
+	padding: 1vh 0;
+	color: #fff;
+	background-color: ${props => props.theme.primary};
+	text-align: center;
 `;
 
 const Footer = ({ children, }) => {

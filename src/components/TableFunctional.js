@@ -8,7 +8,7 @@ import Pagination from './Pagination';
 import Button from './Button';
 
 const ButtonBox = styled.div`
-    max-width: 300px;
+  max-width: 300px;
 `;
 
 export class TableFunctional extends Component {
@@ -79,7 +79,6 @@ export class TableFunctional extends Component {
 							onSelectPage={this.selectPage}
 						/>
 				}
-
 			</Fragment>
 		)
 	}

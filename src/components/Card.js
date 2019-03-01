@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const CardThemed = styled.div`
-    flex-basis: 300px;
-    border: 2px solid ${props => props.theme.primary};
-    text-align: center;
-    margin: 10px;
+	flex-basis: 300px;
+	border: 2px solid ${props => props.theme.primary};
+	text-align: center;
+	margin: 10px;
 `;
 
 const Card = ({ children, }) => {

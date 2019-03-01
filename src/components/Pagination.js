@@ -59,9 +59,8 @@ class Pagination extends Component {
 					onClick={this.handlePrevClick}
 				>
 	keyboard_arrow_left
-
-					{' '}
-    				</i>
+    				
+</i>
 				{
 					pages.map((number, index) => {
 						return (
@@ -84,7 +83,8 @@ class Pagination extends Component {
 				>
 					keyboard_arrow_right
 
-    				</i>
+    				
+</i>
 			</PaginationBox>
 
 		)
