@@ -1,10 +1,3 @@
-const formRatingsArray = (ratings) => {
-	let resultRatings = [];
-	ratings.forEach((rating) => {
-		resultRatings.push(rating.value)
-	})
-
-	return resultRatings;
-}
+const formRatingsArray = (ratings = []) => ratings.map(rating => rating.value);
 
 export default formRatingsArray;

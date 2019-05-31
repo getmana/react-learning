@@ -1,21 +1,11 @@
 import React, { Component, } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { getBooksStart, } from '../../store/models/books';
 import { Field, reduxForm, FieldArray, } from 'redux-form';
 import { connect, formValueSelector, } from '../../decorators';
 import { Button, Form, } from '../../components';
 import { Input, Dropdown, } from '../../modules';
-
-const FormBox = styled.div`
-	padding: 20px;
-	max-width: 300px;
-`;
-
-const LiThemed = styled.li`
-	display: flex;
-	justify-content: space-between;
-`;
+import { FormBox, LiThemed, } from './style';
 
 const renderBooks = ({ fields, meta: { error, submitFailed, }, bookTitle, onChange, resultList, updateList, }) => (
 	<ul>
@@ -31,7 +21,8 @@ const renderBooks = ({ fields, meta: { error, submitFailed, }, bookTitle, onChan
 			>
 				Add Book
 
-   			</Button>
+   			
+</Button>
 			{submitFailed && error && <span>{error}</span>}
 		</li>
 		{fields.map((book, index) => (

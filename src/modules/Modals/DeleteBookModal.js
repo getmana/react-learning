@@ -1,22 +1,7 @@
 import React, { Fragment, } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Button, } from '../../components';
-
-const ButtonBox = styled.div`
-  display: flex;
-	width: 100%;
-	justify-content: space-around;
-
-	button {
-		max-width: 150px;
-	}
-`;
-
-const TitleThemed = styled.h3`
-	color: ${props => props.theme.primary};
-	font-size: 22px;
-`;
+import { ButtonBox, TitleThemed, } from './style';
 
 const DeleteBookModal = ({ onDelete, onClose, bookTitle, }) => {
 	return (
