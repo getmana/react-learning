@@ -6,7 +6,8 @@ import { getBooksStart, } from '../store/models/books';
 import { clearTableParams, sortItems, } from '../store/models/tableFunctional';
 import history from '../store/routingHistory';
 import styled from 'styled-components';
-import { PageTitle, Spinner, Input, TableFunctional, Button, } from '../components';
+import { PageTitle, Spinner, Button, } from '../components';
+import { TableFunctional, Input, } from '../modules';
 
 const PageThemed = styled.div`
 	padding: 20px;

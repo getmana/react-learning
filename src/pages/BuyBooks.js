@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect, } from 'react-redux';
 import { getBooksStart, } from '../store/models/books';
-import { PageTitle, BuyBooksFirstPage, BuyBooksSecondPage, } from '../components';
+import { PageTitle, } from '../components';
+import { BuyBooksFirstPage, BuyBooksSecondPage, } from '../modules';
 
 const PageThemed = styled.div`
 	padding: 20px;

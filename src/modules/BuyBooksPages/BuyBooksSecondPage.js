@@ -1,9 +1,10 @@
 import React, { Component, Fragment, } from 'react';
 import { Field, reduxForm, reset, getFormMeta, destroy, } from 'redux-form';
 import PropTypes from 'prop-types';
-import { connect, formValueSelector, } from '../decorators';
-import { buyBooksStart, } from '../store/models/books';
-import { Input, Button, CardFieldDuplicate, } from '../components';
+import { connect, formValueSelector, } from '../../decorators';
+import { buyBooksStart, } from '../../store/models/books';
+import { Button, CardFieldDuplicate, } from '../../components';
+import { Input, } from '../../modules';
 import {
 	formatDate,
 	formatCardNumber,
@@ -12,9 +13,9 @@ import {
 	parseCVC,
 	parseDate,
 	validate,
-} from '../helpers';
-import img from '../assets/images/credit-card.png'
-import cardBack from '../assets/images/credit-card-back.png'
+} from '../../helpers';
+import img from '../../assets/images/credit-card.png'
+import cardBack from '../../assets/images/credit-card-back.png'
 import styled from 'styled-components';
 
 const ButtonBox = styled.div`

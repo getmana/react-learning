@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import DropdownListItem from './DropdownListItem';
+import { DropdownListItem, } from '../../components';
 
 const ListThemed = styled.ul`
 	display: flex;

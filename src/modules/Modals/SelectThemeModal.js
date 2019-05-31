@@ -1,8 +1,8 @@
 import React, { Fragment, } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { themeIndigo, themeOrange, } from '../configs/themes';
-import Button from './Button';
+import { themeIndigo, themeOrange, } from '../../configs/themes';
+import { Button, } from '../../components';
 
 const LabelThemed = styled.label`
 	padding: 0 20px;

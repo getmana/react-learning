@@ -1,25 +1,26 @@
 // routing
 export { ConnectedRouter as Router } from 'connected-react-router';
-export { default as Header } from './Header';
-export { default as Footer } from './Footer';
-export { default as MainSection } from './MainSection';
-export { default as Portal } from './Portal';
-export { default as SelectThemeModal } from './SelectThemeModal.js';
-export { default as Sidebar } from './Sidebar';
-export { default as Button } from './Button';
-export { default as Title } from './Title';
-export { default as Dropdown } from './Dropdown';
-export { default as Input } from './Input';
-export { default as PageTitle } from './PageTitle';
-export { default as Table } from './Table';
-export { default as Card } from './Card';
-export { default as Spinner } from './Spinner';
-export { default as Pagination } from './Pagination';
-export { default as TableFunctional } from './TableFunctional';
-export { default as CenteredModal } from './CenteredModal';
-export { default as DeleteBookModal } from './DeleteBookModal';
-export { default as MessageModal } from './MessageModal';
-export { default as BuyBooksFirstPage } from './BuyBooksFirstPage';
-export { default as BuyBooksSecondPage } from './BuyBooksSecondPage';
-export { default as CardFieldDuplicate } from './CardFieldDuplicate';
 export { Form, Field } from 'redux-form';
+
+// controls
+export { default as Button } from './controls/Button';
+export { default as InputElement } from './controls/InputElement';
+export { default as DropdownListItem } from './controls/DropdownListItem';
+
+// indicators
+export { default as Spinner } from './indicators/Spinner';
+
+// layout
+export { default as Footer } from './layout/Footer';
+export { default as Header } from './layout/Header';
+export { default as MainSection } from './layout/MainSection';
+export { default as Card } from './layout/Card';
+export { default as Table } from './layout/Table';
+export { default as DropdownList } from './layout/DropdownList';
+export { default as Portal } from './layout/Portal';
+
+// typography
+export { default as Title } from './typography/Title';
+export { default as Label } from './typography/Label';
+export { default as PageTitle } from './typography/PageTitle';
+export { default as CardFieldDuplicate } from './typography/CardFieldDuplicate';
