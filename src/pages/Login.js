@@ -14,7 +14,35 @@ const FormBox = styled.div`
 	max-width: 300px;
 `;
 
-export class Login extends Component {
+const selector = formValueSelector('loginForm')
+
+const mapStateToProps = (state) => {
+	const password = selector(state, 'password');
+	const initLogin = {
+		authType: 'phone',
+	}
+
+	return ({
+		processing: state.user.processing,
+		password,
+		initialValues: { ...initLogin, },
+	})
+}
+
+@connect(
+	mapStateToProps,
+	{ loginStart, },
+)
+
+@reduxForm({
+	form: 'loginForm',
+	enableReinitialize: true,
+	onSubmit: (values, dispatch ) => {
+		dispatch(loginStart(values));
+	},
+})
+
+export default class Login extends Component {
 	state = {
 		isPhone: true,
 	}
@@ -92,35 +120,7 @@ export class Login extends Component {
 
 Login.propTypes = {
 	handleSubmit: PropTypes.func,
-	processing: PropTypes.bool.isRequired,
+	processing: PropTypes.bool,
 	password: PropTypes.string,
 	change: PropTypes.func,
 }
-
-const LoginContainer = reduxForm({
-	form: 'loginForm',
-	enableReinitialize: true,
-	onSubmit: (values, dispatch ) => {
-		dispatch(loginStart(values));
-	},
-})(Login);
-
-const selector = formValueSelector('loginForm')
-
-const mapStateToProps = (state) => {
-	const password = selector(state, 'password');
-	const initLogin = {
-		authType: 'phone',
-	}
-
-	return ({
-		processing: state.user.processing,
-		password,
-		initialValues: { ...initLogin, },
-	})
-}
-
-export default connect(
-	mapStateToProps,
-	{ loginStart, },
-)(LoginContainer);

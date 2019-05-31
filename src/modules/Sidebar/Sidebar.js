@@ -25,7 +25,7 @@ const LiThemed = styled.li`
 
 `;
 
-class Sidebar extends Component {
+export default class Sidebar extends Component {
 	state = {
 		loading: false,
 		disabled: true,
@@ -71,8 +71,6 @@ class Sidebar extends Component {
 		)
 	}
 }
-
-export default Sidebar;
 
 Sidebar.propTypes = {
 	onOpenModal: PropTypes.func.isRequired,

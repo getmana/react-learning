@@ -36,7 +36,6 @@ const apiService = (method, url, requestData) => {
 		else {
 			message = error.response.data
 		}
-		console.log('error apiService', error.response.data)
 		store.dispatch(openMessageModal(message, 'Error'))
 		throw new Error(error.response.data);
 	})

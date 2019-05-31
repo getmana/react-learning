@@ -31,8 +31,7 @@ const renderBooks = ({ fields, meta: { error, submitFailed, }, bookTitle, onChan
 			>
 				Add Book
 
-   			
-</Button>
+   			</Button>
 			{submitFailed && error && <span>{error}</span>}
 		</li>
 		{fields.map((book, index) => (
@@ -71,7 +70,35 @@ renderBooks.propTypes = {
 	updateList: PropTypes.func,
 }
 
-export class BuyBooksFirstPage extends Component {
+const selector = formValueSelector('buyBooksForm')
+
+const mapStateToProps = (state) => {
+	const bookTitle = selector(state, 'bookTitle');
+	const addedBooks = selector(state, 'books');
+
+	return ({
+		bookTitle,
+		addedBooks,
+		books: state.books.books,
+	})
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	getBooksStart: (params) => dispatch(getBooksStart(params)),
+})
+
+@connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)
+
+@reduxForm({
+	form: 'buyBooksForm',
+	destroyOnUnmount: false,
+	forceUnregisterOnUnmount: true,
+})
+
+export default class BuyBooksFirstPage extends Component {
 	state = {
 		resultList: [],
 	}
@@ -167,39 +194,11 @@ export class BuyBooksFirstPage extends Component {
 }
 
 BuyBooksFirstPage.propTypes = {
-	handleSubmit: PropTypes.func.isRequired,
-	change: PropTypes.func.isRequired,
+	handleSubmit: PropTypes.func,
+	change: PropTypes.func,
 	addedBooks: PropTypes.arrayOf(PropTypes.string),
 	bookTitle: PropTypes.string,
-	getBooksStart: PropTypes.func.isRequired,
+	getBooksStart: PropTypes.func,
 	initList: PropTypes.arrayOf(PropTypes.string),
 	books: PropTypes.arrayOf(PropTypes.object),
 }
-
-const FirstPageContainer = reduxForm({
-	form: 'buyBooksForm',
-	destroyOnUnmount: false,
-	forceUnregisterOnUnmount: true,
-})(BuyBooksFirstPage);
-
-const selector = formValueSelector('buyBooksForm')
-
-const mapStateToProps = (state) => {
-	const bookTitle = selector(state, 'bookTitle');
-	const addedBooks = selector(state, 'books');
-
-	return ({
-		bookTitle,
-		addedBooks,
-		books: state.books.books,
-	})
-}
-
-const mapDispatchToProps = (dispatch) => ({
-	getBooksStart: (params) => dispatch(getBooksStart(params)),
-})
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(FirstPageContainer);

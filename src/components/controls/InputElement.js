@@ -18,7 +18,7 @@ const InputThemed = styled.input`
 	}
 `;
 
-class InputElement extends Component {
+export default class InputElement extends Component {
 	handleClick = (e) => {
 		const { onOpenDropdown, } = this.props;
 
@@ -46,8 +46,6 @@ class InputElement extends Component {
 		)
 	}
 }
-
-export default InputElement;
 
 InputElement.propTypes = {
 	type: PropTypes.string.isRequired,

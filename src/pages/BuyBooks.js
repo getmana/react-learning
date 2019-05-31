@@ -11,7 +11,22 @@ const PageThemed = styled.div`
 	flex: 1 0 280px;
 `;
 
-export class BuyBooks extends Component {
+const mapStateToProps = (state) => {
+	return ({
+		books: state.books.books,
+	})
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	getBooksStart: (params) => dispatch(getBooksStart(params)),
+})
+
+@connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)
+
+export default class BuyBooks extends Component {
 	state = {
 		page: 1,
 	}
@@ -55,24 +70,9 @@ export class BuyBooks extends Component {
 BuyBooks.propTypes = {
 	onSubmit: PropTypes.func,
 	books: PropTypes.arrayOf(PropTypes.object),
-	getBooksStart: PropTypes.func.isRequired,
+	getBooksStart: PropTypes.func,
 }
 
 BuyBooks.defaultProps = {
 	books: [],
 }
-
-const mapStateToProps = (state) => {
-	return ({
-		books: state.books.books,
-	})
-}
-
-const mapDispatchToProps = (dispatch) => ({
-	getBooksStart: (params) => dispatch(getBooksStart(params)),
-})
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(BuyBooks);
