@@ -4,7 +4,7 @@ import { connect, } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider, } from 'styled-components';
 import { closeMessageModal, } from '../store/models/messageModal';
-import Logo from '../images/react-logo.png';
+import Logo from '../assets/images/react-logo.png';
 import { themeIndigo, themeOrange, } from '../configs/themes';
 import { Header, Footer, MainSection, Portal, SelectThemeModal, Sidebar, CenteredModal, MessageModal, } from '../components';
 import HomePage from './HomePage';
