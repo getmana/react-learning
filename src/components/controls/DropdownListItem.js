@@ -11,7 +11,7 @@ const ItemThemed = styled.li`
 	}
 `;
 
-class DropdownListItem extends Component {
+export default class DropdownListItem extends Component {
 	handleClick = () => {
 		const { item, onSelectVariant, } = this.props;
 		onSelectVariant(item);
@@ -28,8 +28,6 @@ class DropdownListItem extends Component {
 		)
 	}
 }
-
-export default DropdownListItem;
 
 DropdownListItem.propTypes = {
 	item: PropTypes.oneOfType([

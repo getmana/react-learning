@@ -18,7 +18,27 @@ const InputBox = styled.div`
 	max-width: 300px;
 `;
 
-export class Books extends Component {
+const mapStateToProps = (state) => {
+	return ({
+		processing: state.books.processing,
+		books: state.books.books,
+		prevQueryString: state.books.queryString,
+		numberOfBooks: state.books.numberOfBooks,
+	})
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	getBooksStart: (params) => dispatch(getBooksStart(params)),
+	clearTableParams: () => dispatch(clearTableParams()),
+	sortItems: (isSorted) => dispatch(sortItems(isSorted)),
+})
+
+@connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)
+
+export default class Books extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -149,38 +169,18 @@ export class Books extends Component {
 }
 
 Books.propTypes = {
-	getBooksStart: PropTypes.func.isRequired,
-	processing: PropTypes.bool.isRequired,
-	books: PropTypes.arrayOf(PropTypes.object).isRequired,
+	getBooksStart: PropTypes.func,
+	processing: PropTypes.bool,
+	books: PropTypes.arrayOf(PropTypes.object),
 	numberOfBooks: PropTypes.oneOfType([
 		PropTypes.string,
 		PropTypes.number
 	]),
-	clearTableParams: PropTypes.func.isRequired,
-	sortItems: PropTypes.func.isRequired,
+	clearTableParams: PropTypes.func,
+	sortItems: PropTypes.func,
 	match: PropTypes.shape({
 		path: PropTypes.string,
 		params: PropTypes.object,
 		url: PropTypes.string,
 	}),
 }
-
-const mapStateToProps = (state) => {
-	return ({
-		processing: state.books.processing,
-		books: state.books.books,
-		prevQueryString: state.books.queryString,
-		numberOfBooks: state.books.numberOfBooks,
-	})
-}
-
-const mapDispatchToProps = (dispatch) => ({
-	getBooksStart: (params) => dispatch(getBooksStart(params)),
-	clearTableParams: () => dispatch(clearTableParams()),
-	sortItems: (isSorted) => dispatch(sortItems(isSorted)),
-})
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(Books);

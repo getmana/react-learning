@@ -30,7 +30,7 @@ const PaginationBox = styled.div`
 	}
 `;
 
-class Pagination extends Component {
+export default class Pagination extends Component {
 	handlePrevClick = () => {
 		const { pageNumber, onSelectPage, } = this.props;
 
@@ -59,8 +59,8 @@ class Pagination extends Component {
 					onClick={this.handlePrevClick}
 				>
 	keyboard_arrow_left
-    				
-</i>
+
+    				</i>
 				{
 					pages.map((number, index) => {
 						return (
@@ -83,15 +83,12 @@ class Pagination extends Component {
 				>
 					keyboard_arrow_right
 
-    				
-</i>
+    				</i>
 			</PaginationBox>
 
 		)
 	}
 }
-
-export default Pagination;
 
 Pagination.propTypes = {
 	pageNumber: PropTypes.number.isRequired,

@@ -58,7 +58,25 @@ const portalInitStyle = {
 	left: '30%',
 };
 
-export class App extends Component {
+const mapStateToProps = (state) => {
+	return ({
+		message: state.messageModal.message,
+		title: state.messageModal.title,
+	})
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	closeMessageModal: () => dispatch(closeMessageModal()),
+})
+
+@withRouter
+
+@connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)
+
+export default class App extends Component {
 	state = {
 		modalIsOpen: false,
 		themeName: themeOrange,
@@ -144,25 +162,9 @@ export class App extends Component {
 App.propTypes = {
 	message: PropTypes.string,
 	title: PropTypes.string,
-	closeMessageModal: PropTypes.func.isRequired,
+	closeMessageModal: PropTypes.func,
 }
 App.defaultProps = {
 	message: '',
 	title: '',
 }
-
-const mapStateToProps = (state) => {
-	return ({
-		message: state.messageModal.message,
-		title: state.messageModal.title,
-	})
-}
-
-const mapDispatchToProps = (dispatch) => ({
-	closeMessageModal: () => dispatch(closeMessageModal()),
-})
-
-export default withRouter(connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(App));

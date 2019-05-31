@@ -114,7 +114,6 @@ function* addBookSaga(action) {
 
 function* buyBooksSaga(action) {
 	const { buyBooksData, } = action.payload;
-	console.log('saga buyBooksData', buyBooksData);
 
 	try {
 		yield call(apiService, 'POST', '/buy_books', { data: buyBooksData, });

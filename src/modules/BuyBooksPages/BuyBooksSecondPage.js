@@ -89,7 +89,60 @@ const NameAndDateContainer = styled.div`
 	justify-content: space-between;
 `;
 
-export class BuyBooksSecondPage extends Component {
+const selector = formValueSelector('buyBooksForm');
+
+const mapStateToProps = (state) => {
+	const cardNumberValue = selector(state, 'cardNumber');
+	const cardNameValue = selector(state, 'cardName');
+	const cardDateValue = selector(state, 'cardDate');
+	const cvcValue = selector(state, 'cvc');
+	const metaSelector = getFormMeta('buyBooksForm');
+
+	return ({
+		cardNumberValue,
+		cardNameValue,
+		cardDateValue,
+		cvcValue,
+		formMeta: metaSelector(state),
+	})
+}
+
+@connect(
+	mapStateToProps,
+	{ buyBooksStart, },
+)
+
+@reduxForm({
+	form: 'buyBooksForm',
+	destroyOnUnmount: false,
+	forceUnregisterOnUnmount: true,
+	validate,
+	onSubmit: (values, dispatch, props ) => {
+		const allBooksList = props.allBooksList;
+		const booksId = values.books.map((title) => {
+			const book = allBooksList.filter((currentBook) => {
+				return currentBook.title === title
+			})
+
+			return book[0].id;
+		})
+		const responseData = {
+			card: {
+				number: +values.cardNumber,
+				name: values.cardName,
+				date: values.cardDate,
+				cvc: +values.cvc,
+			},
+			books: booksId,
+		}
+
+		dispatch(buyBooksStart(responseData));
+		dispatch(reset('buyBooksForm'));
+		dispatch(destroy('buyBooksForm'));
+	},
+})
+
+export default class BuyBooksSecondPage extends Component {
 	parseCardNumber = (cardNumber) => {
 		const stars = cardNumber.padEnd(16, '*');
 
@@ -189,8 +242,8 @@ export class BuyBooksSecondPage extends Component {
 }
 
 BuyBooksSecondPage.propTypes = {
-	handleSubmit: PropTypes.func.isRequired,
-	onPrevStep: PropTypes.func.isRequired,
+	handleSubmit: PropTypes.func,
+	onPrevStep: PropTypes.func,
 	cardNumberValue: PropTypes.string,
 	cardNameValue: PropTypes.string,
 	cardDateValue: PropTypes.string,
@@ -204,56 +257,3 @@ BuyBooksSecondPage.propTypes = {
 BuyBooksSecondPage.defaultProps = {
 	formMeta: {},
 }
-
-const SecondPageContainer = reduxForm({
-	form: 'buyBooksForm',
-	destroyOnUnmount: false,
-	forceUnregisterOnUnmount: true,
-	validate,
-	onSubmit: (values, dispatch, props ) => {
-		const allBooksList = props.allBooksList;
-		const booksId = values.books.map((title) => {
-			const book = allBooksList.filter((currentBook) => {
-				return currentBook.title === title
-			})
-
-			return book[0].id;
-		})
-		const responseData = {
-			card: {
-				number: +values.cardNumber,
-				name: values.cardName,
-				date: values.cardDate,
-				cvc: +values.cvc,
-			},
-			books: booksId,
-		}
-
-		dispatch(buyBooksStart(responseData));
-		dispatch(reset('buyBooksForm'));
-		dispatch(destroy('buyBooksForm'));
-	},
-})(BuyBooksSecondPage);
-
-const selector = formValueSelector('buyBooksForm');
-
-const mapStateToProps = (state) => {
-	const cardNumberValue = selector(state, 'cardNumber');
-	const cardNameValue = selector(state, 'cardName');
-	const cardDateValue = selector(state, 'cardDate');
-	const cvcValue = selector(state, 'cvc');
-	const metaSelector = getFormMeta('buyBooksForm');
-
-	return ({
-		cardNumberValue,
-		cardNameValue,
-		cardDateValue,
-		cvcValue,
-		formMeta: metaSelector(state),
-	})
-}
-
-export default connect(
-	mapStateToProps,
-	{ buyBooksStart, },
-)(SecondPageContainer);

@@ -61,7 +61,7 @@ const ErrorMessage = styled.div`
 	font-size: 12px;
 `;
 
-class Input extends Component {
+export default class Input extends Component {
 	render() {
 		const {
 			type,
@@ -110,8 +110,6 @@ class Input extends Component {
 		)
 	}
 }
-
-export default Input;
 
 Input.propTypes = {
 	label: PropTypes.string,

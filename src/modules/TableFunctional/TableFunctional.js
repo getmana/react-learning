@@ -10,7 +10,28 @@ const ButtonBox = styled.div`
   max-width: 300px;
 `;
 
-export class TableFunctional extends Component {
+const mapStateToProps = (state) => {
+	return ({
+		pageNumber: state.tableFunctional.pageNumber,
+		isSorted: state.tableFunctional.isSorted,
+		pages: state.tableFunctional.pages,
+		numberOfPages: state.tableFunctional.numberOfPages,
+	})
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	changePageNumber: (pageNumber) => dispatch(changePageNumber(pageNumber)),
+	sortItems: (isSorted) => dispatch(sortItems(isSorted)),
+	savePages: (pages) => dispatch(savePages(pages)),
+
+})
+
+@connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)
+
+export default class TableFunctional extends Component {
 	componentDidMount() {
 		const { numberOfPages, } = this.props;
 
@@ -84,42 +105,21 @@ export class TableFunctional extends Component {
 }
 
 TableFunctional.propTypes = {
-	tableColumns: PropTypes.arrayOf(PropTypes.string).isRequired,
-	tableContent: PropTypes.arrayOf(PropTypes.object).isRequired,
+	tableColumns: PropTypes.arrayOf(PropTypes.string),
+	tableContent: PropTypes.arrayOf(PropTypes.object),
 	caption: PropTypes.string,
 	onClick: PropTypes.func,
-	limit: PropTypes.number.isRequired,
+	limit: PropTypes.number,
 	numberOfItems: PropTypes.oneOfType([
 		PropTypes.string,
 		PropTypes.number
 	]),
 	onLoadItems: PropTypes.func,
 	pageNumber: PropTypes.number,
-	numberOfPages: PropTypes.number.isRequired,
-	isSorted: PropTypes.bool.isRequired,
-	savePages: PropTypes.func.isRequired,
-	sortItems: PropTypes.func.isRequired,
-	changePageNumber: PropTypes.func.isRequired,
-	pages: PropTypes.arrayOf(PropTypes.number).isRequired,
+	numberOfPages: PropTypes.number,
+	isSorted: PropTypes.bool,
+	savePages: PropTypes.func,
+	sortItems: PropTypes.func,
+	changePageNumber: PropTypes.func,
+	pages: PropTypes.arrayOf(PropTypes.number),
 }
-
-const mapStateToProps = (state) => {
-	return ({
-		pageNumber: state.tableFunctional.pageNumber,
-		isSorted: state.tableFunctional.isSorted,
-		pages: state.tableFunctional.pages,
-		numberOfPages: state.tableFunctional.numberOfPages,
-	})
-}
-
-const mapDispatchToProps = (dispatch) => ({
-	changePageNumber: (pageNumber) => dispatch(changePageNumber(pageNumber)),
-	sortItems: (isSorted) => dispatch(sortItems(isSorted)),
-	savePages: (pages) => dispatch(savePages(pages)),
-
-})
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(TableFunctional);

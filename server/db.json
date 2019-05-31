@@ -718,7 +718,7 @@
       "title": "Beloved",
       "year": 1987,
       "id": 66,
-      "rating": 4
+      "rating": 5
     },
     {
       "author": "Murasaki Shikibu",
@@ -1115,6 +1115,17 @@
       "rating": 1,
       "imageLink": "images/fairy-tales.png",
       "id": 102
+    },
+    {
+      "title": "hdfrtyrsyhrzet",
+      "author": "hgxdj fryghujryj",
+      "country": "hgjrfts",
+      "year": "1984",
+      "language": "Greek",
+      "rating": 5,
+      "pages": "65",
+      "imageLink": "/img.jpg",
+      "id": 103
     }
   ],
   "languages": [

@@ -45,7 +45,73 @@ const portalInitStyle = {
 	left: '30%',
 };
 
-export class SingleBook extends Component {
+const mapStateToProps = (state) => {
+	const currentBook = state.books.currentBook;
+	let bookData = {};
+
+	if (currentBook && Object.keys(currentBook).length) {
+		bookData = {
+			title: currentBook.title,
+			author: currentBook.author,
+			country: currentBook.country,
+			year: currentBook.year,
+			language: currentBook.language,
+			link: currentBook.link,
+			pages: currentBook.pages,
+			rating: currentBook.rating,
+			imageLink: currentBook.imageLink,
+		}
+	}
+
+	return ({
+		currentBook: state.books.currentBook,
+		processing: state.books.processing,
+		initialValues: { ...bookData, },
+		language: bookData.language,
+		languages: state.books.languages,
+		ratings: state.books.ratings,
+		rating: bookData.rating,
+		title: bookData.title,
+		processingRatings: state.books.processingRatings,
+		processingLanguages: state.books.processingLanguages,
+		editingMode: state.books.editingMode,
+		modalMessage: state.books.modalMessage,
+		modalTitle: state.books.modalTitle,
+	})
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	getCurrentBookStart: (id) => dispatch(getCurrentBookStart(id)),
+	getLanguagesStart: () => dispatch(getLanguagesStart()),
+	getRatingsStart: () => dispatch(getRatingsStart()),
+	setEditingMode: (value) => dispatch(setEditingMode(value)),
+	deleteBookStart: (id) => dispatch(deleteBookStart(id)),
+	clearTableParams: () => dispatch(clearTableParams()),
+	clearCurrentBook: () => dispatch(clearCurrentBook()),
+})
+
+@connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)
+
+@reduxForm({
+	form: 'singleBookForm',
+	enableReinitialize: true,
+	onSubmit: (values, dispatch, props ) => {
+		const { id, } = props.match.params;
+
+		if (id === 'add') {
+			dispatch(addBookStart(values));
+		}
+		else {
+			dispatch(editBookStart(values, id));
+		}
+		dispatch(setEditingMode(false));
+	},
+})
+
+export default class SingleBook extends Component {
 	state = {
 		modalIsOpen: false,
 	}
@@ -69,7 +135,6 @@ export class SingleBook extends Component {
 	}
 
 	selectVariant = (param, fieldName) => {
-		console.log('fieldName', fieldName)
 		this.props.change(fieldName, param)
 	}
 
@@ -243,17 +308,17 @@ export class SingleBook extends Component {
 
 SingleBook.propTypes = {
 	books: PropTypes.arrayOf(PropTypes.object),
-	getCurrentBookStart: PropTypes.func.isRequired,
-	getLanguagesStart: PropTypes.func.isRequired,
-	getRatingsStart: PropTypes.func.isRequired,
-	processing: PropTypes.bool.isRequired,
-	processingLanguages: PropTypes.bool.isRequired,
-	processingRatings: PropTypes.bool.isRequired,
+	getCurrentBookStart: PropTypes.func,
+	getLanguagesStart: PropTypes.func,
+	getRatingsStart: PropTypes.func,
+	processing: PropTypes.bool,
+	processingLanguages: PropTypes.bool,
+	processingRatings: PropTypes.bool,
 	match: PropTypes.shape({
 		params: PropTypes.object,
 		id: PropTypes.string,
 	}),
-	handleSubmit: PropTypes.func.isRequired,
+	handleSubmit: PropTypes.func,
 	languages: PropTypes.arrayOf(PropTypes.string),
 	language: PropTypes.string,
 	ratings: PropTypes.arrayOf(PropTypes.number),
@@ -261,15 +326,15 @@ SingleBook.propTypes = {
 		PropTypes.string,
 		PropTypes.number,
 	]),
-	change: PropTypes.func.isRequired,
-	reset: PropTypes.func.isRequired,
+	change: PropTypes.func,
+	reset: PropTypes.func,
 	theme: PropTypes.objectOf(PropTypes.string),
-	editingMode: PropTypes.bool.isRequired,
-	setEditingMode: PropTypes.func.isRequired,
+	editingMode: PropTypes.bool,
+	setEditingMode: PropTypes.func,
 	title: PropTypes.string,
-	deleteBookStart: PropTypes.func.isRequired,
-	clearTableParams: PropTypes.func.isRequired,
-	clearCurrentBook: PropTypes.func.isRequired,
+	deleteBookStart: PropTypes.func,
+	clearTableParams: PropTypes.func,
+	clearCurrentBook: PropTypes.func,
 }
 
 SingleBook.defaultProp = {
@@ -279,69 +344,3 @@ SingleBook.defaultProp = {
 	rating: '',
 	title: '',
 }
-
-const SingleBookContainer = reduxForm({
-	form: 'singleBookForm',
-	enableReinitialize: true,
-	onSubmit: (values, dispatch, props ) => {
-		const { id, } = props.match.params;
-
-		if (id === 'add') {
-			dispatch(addBookStart(values));
-		}
-		else {
-			dispatch(editBookStart(values, id));
-		}
-		dispatch(setEditingMode(false));
-	},
-})(SingleBook);
-
-const mapStateToProps = (state) => {
-	const currentBook = state.books.currentBook;
-	let bookData = {};
-
-	if (currentBook && Object.keys(currentBook).length) {
-		bookData = {
-			title: currentBook.title,
-			author: currentBook.author,
-			country: currentBook.country,
-			year: currentBook.year,
-			language: currentBook.language,
-			link: currentBook.link,
-			pages: currentBook.pages,
-			rating: currentBook.rating,
-			imageLink: currentBook.imageLink,
-		}
-	}
-
-	return ({
-		currentBook: state.books.currentBook,
-		processing: state.books.processing,
-		initialValues: { ...bookData, },
-		language: bookData.language,
-		languages: state.books.languages,
-		ratings: state.books.ratings,
-		rating: bookData.rating,
-		title: bookData.title,
-		processingRatings: state.books.processingRatings,
-		processingLanguages: state.books.processingLanguages,
-		editingMode: state.books.editingMode,
-		modalMessage: state.books.modalMessage,
-		modalTitle: state.books.modalTitle,
-	})
-}
-
-const mapDispatchToProps = (dispatch) => ({
-	getCurrentBookStart: (id) => dispatch(getCurrentBookStart(id)),
-	getLanguagesStart: () => dispatch(getLanguagesStart()),
-	getRatingsStart: () => dispatch(getRatingsStart()),
-	setEditingMode: (value) => dispatch(setEditingMode(value)),
-	deleteBookStart: (id) => dispatch(deleteBookStart(id)),
-	clearTableParams: () => dispatch(clearTableParams()),
-	clearCurrentBook: () => dispatch(clearCurrentBook()),
-})
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(SingleBookContainer);

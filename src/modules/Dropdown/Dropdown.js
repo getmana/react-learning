@@ -38,7 +38,7 @@ const ErrorMessage = styled.div`
 	font-size: 12px;
 `;
 
-class Dropdown extends Component {
+export default class Dropdown extends Component {
 	state = {
 		currentValue: this.props.defaultProp,
 		isOpen: false,
@@ -140,8 +140,6 @@ class Dropdown extends Component {
 		)
 	}
 }
-
-export default Dropdown;
 
 Dropdown.propTypes = {
 	label: PropTypes.string.isRequired,
