@@ -1,9 +1,7 @@
 import React, { Component, } from 'react';
 import { Link, } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Button from './Button';
-import Title from './Title';
-import Spinner from './Spinner';
+import { Button, Title, Spinner, } from '../../components';
 import styled from 'styled-components';
 
 const SidebarThemed = styled.aside`

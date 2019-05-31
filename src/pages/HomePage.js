@@ -1,6 +1,7 @@
 import React, { Component, } from 'react';
 import styled from 'styled-components';
-import { PageTitle, Title, Card, Input, Dropdown, Table, } from '../components';
+import { PageTitle, Title, Card, Table, } from '../components';
+import { Input, Dropdown, } from '../modules';
 import { cards, tableContent, list, } from '../mock/mockData';
 
 const ContentThemed = styled.main`

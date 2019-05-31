@@ -14,7 +14,8 @@ import {
 import { clearTableParams, } from '../store/models/tableFunctional';
 import styled from 'styled-components';
 import { englishLetters, imageLinks, positiveNumbers, lessThenCurrent, wikiFormat, isOneOf, onlyInteger, required, } from '../helpers';
-import { PageTitle, Spinner, Input, Button, Form, Field, Dropdown, Portal, CenteredModal, DeleteBookModal, } from '../components';
+import { PageTitle, Spinner, Button, Form, Field, Portal, } from '../components';
+import { CenteredModal, DeleteBookModal, Input, Dropdown, } from '../modules';
 
 const PageThemed = styled.div`
 	padding: 20px;

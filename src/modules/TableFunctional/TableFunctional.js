@@ -2,10 +2,9 @@ import React, { Component, Fragment, } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect, } from 'react-redux';
-import { changePageNumber, sortItems, savePages, } from '../store/models/tableFunctional';
-import Table from './Table';
-import Pagination from './Pagination';
-import Button from './Button';
+import { changePageNumber, sortItems, savePages, } from '../../store/models/tableFunctional';
+import { Table, Button, } from '../../components';
+import { Pagination, } from '../../modules';
 
 const ButtonBox = styled.div`
   max-width: 300px;

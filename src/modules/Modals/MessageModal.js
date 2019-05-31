@@ -1,7 +1,6 @@
 import React, { Fragment, } from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button';
-import Portal from './Portal';
+import { Button, Portal, } from '../../components';
 import CenteredModal from './CenteredModal';
 
 const portalInitStyle = {

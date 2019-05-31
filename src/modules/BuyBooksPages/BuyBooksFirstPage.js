@@ -1,10 +1,11 @@
 import React, { Component, } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { getBooksStart, } from '../store/models/books';
+import { getBooksStart, } from '../../store/models/books';
 import { Field, reduxForm, FieldArray, } from 'redux-form';
-import { connect, formValueSelector, } from '../decorators';
-import { Dropdown, Button, Form, Input, } from '../components';
+import { connect, formValueSelector, } from '../../decorators';
+import { Button, Form, } from '../../components';
+import { Input, Dropdown, } from '../../modules';
 
 const FormBox = styled.div`
 	padding: 20px;
@@ -30,7 +31,8 @@ const renderBooks = ({ fields, meta: { error, submitFailed, }, bookTitle, onChan
 			>
 				Add Book
 
-   			</Button>
+   			
+</Button>
 			{submitFailed && error && <span>{error}</span>}
 		</li>
 		{fields.map((book, index) => (

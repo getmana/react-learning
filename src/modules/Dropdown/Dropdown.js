@@ -1,10 +1,7 @@
 import React, { Component, } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import DropdownList from './DropdownList';
-import Label from './Label';
-import InputElement from './InputElement';
-import Portal from './Portal';
+import { Label, InputElement, Portal, DropdownList, } from '../../components';
 
 const DropdownThemed = styled.div`
 	display: flex;

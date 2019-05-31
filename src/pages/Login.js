@@ -2,7 +2,8 @@ import React, { Component, } from 'react';
 import { reduxForm, connect, formValueSelector, } from '../decorators';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Dropdown, Input, Button, Form, Field, PageTitle, } from '../components';
+import { Button, Form, Field, PageTitle, } from '../components';
+import { Input, Dropdown, } from '../modules';
 import { required, emailValue, formatPhone, numberLength, parsePhone, } from '../helpers';
 import { loginStart, } from '../store/models/user';
 
