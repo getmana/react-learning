@@ -2,28 +2,7 @@ import React, { Component, } from 'react';
 import { Link, } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Title, Spinner, } from '../../components';
-import styled from 'styled-components';
-
-const SidebarThemed = styled.aside`
-	flex: none;
-	display: flex;
-	flex-direction: column;
-	min-width: 250px;
-	padding: 20px;
-`;
-
-const LiThemed = styled.li`
-	padding: 5px 20px;
-
-	a {
-		color: ${props => props.theme.primary};
-	}
-
-	a:hover {
-		color: ${props => props.theme.secondary};
-	}
-
-`;
+import { SidebarThemed, LiThemed, } from './style';
 
 export default class Sidebar extends Component {
 	state = {

@@ -2,16 +2,7 @@ import React, { Fragment, } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Portal, } from '../../components';
 import CenteredModal from './CenteredModal';
-
-const portalInitStyle = {
-	position: 'fixed',
-	zIndex: '10',
-	fontFamily: 'Roboto, sans-serif',
-	width: '40%',
-	height: '40vh',
-	top: '30vh',
-	left: '30%',
-};
+import { portalInitStyle, } from './style';
 
 const MessageModal = ({ title, info, onClose, }) => {
 	return (
