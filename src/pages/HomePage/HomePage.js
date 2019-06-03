@@ -27,6 +27,13 @@ export default class Content extends Component {
 		console.log('Clicked!');
 	}
 
+	renderCard = (card) => (
+		<Card key={card.id}>
+			<CardTitle>{card.title}</CardTitle>
+			<CardContent>{card.content}</CardContent>
+		</Card>
+	)
+
 	render() {
 		const { name, password, } = this.state;
 		const tableColumns = [ 'id', 'name', 'size', 'description', 'price' ];
@@ -37,14 +44,7 @@ export default class Content extends Component {
 				<Title>Cards Section</Title>
 				<CardContainer>
 					{
-						cards.map((card) => {
-							return (
-								<Card key={card.id}>
-									<CardTitle>{card.title}</CardTitle>
-									<CardContent>{card.content}</CardContent>
-								</Card>
-							)
-						})
+						cards.map((card) => this.renderCard(card))
 					}
 				</CardContainer>
 				<Title>Inputs Section</Title>

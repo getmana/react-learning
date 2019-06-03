@@ -1,20 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { HeaderThemed, } from './style';
+import { Link, } from 'react-router-dom';
+import Logo from '../../../assets/images/react-logo.png';
+import { HeaderThemed, HeaderTitle, LogoImage, LinkBox, } from './style';
 
-const Header = ({ children, }) => {
+const Header = () => {
 	return (
 		<HeaderThemed>
-			{children}
+			<Link to="/"><LogoImage src={Logo} /></Link>
+			<HeaderTitle>Hello from React</HeaderTitle>
+			<LinkBox>
+				<Link to="/login">login</Link>
+			</LinkBox>
 		</HeaderThemed>
 	)
 }
 
 export default Header;
-
-Header.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node
-	]).isRequired,
-}

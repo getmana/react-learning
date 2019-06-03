@@ -4,7 +4,7 @@
       "author": "Chinua Achebe",
       "country": "Nigeria",
       "imageLink": "images/things-fall-apart.jpg",
-      "language": "Greek",
+      "language": "Arabic",
       "link": "https://en.wikipedia.org/wiki/Things_Fall_Apart\n",
       "pages": 209,
       "title": "Things Fall Apart",
@@ -16,7 +16,7 @@
       "author": "Hans Christian Andersen",
       "country": "Denmark",
       "imageLink": "images/fairy-tales.png",
-      "language": "Italian",
+      "language": "Danish",
       "link": "https://en.wikipedia.org/wiki/Fairy_Tales_Told_for_Children._First_Collection.",
       "pages": "785",
       "title": "Fairy tales",
@@ -32,7 +32,7 @@
       "link": "https://en.wikipedia.org/wiki/Divine_Comedy\n",
       "pages": "931",
       "title": "The Divine Comedy",
-      "year": 1315,
+      "year": "1316",
       "id": 3,
       "rating": 3
     },
@@ -88,7 +88,7 @@
       "author": "Jane Austen",
       "country": "United Kingdom",
       "imageLink": "images/pride-and-prejudice.jpg",
-      "language": "English",
+      "language": "Italian",
       "link": "https://en.wikipedia.org/wiki/Pride_and_Prejudice\n",
       "pages": 226,
       "title": "Pride and Prejudice",
@@ -118,7 +118,7 @@
       "title": "Molloy, Malone Dies, The Unnamable, the trilogy",
       "year": "2012",
       "id": 10,
-      "rating": 3
+      "rating": 4
     },
     {
       "author": "Giovanni Boccaccio",
