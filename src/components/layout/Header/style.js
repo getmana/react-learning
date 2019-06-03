@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const HeaderThemed = styled.header`
-	color: ${props => props.theme.primary};
-	background-color: ${props => props.theme.secondaryBg};
+	color: ${props => props.theme.secondaryBg};
+	background-color: ${props => props.theme.primary};
 	justify-content: space-between;
 	padding: 30px 20px;
 	display: flex;
@@ -29,7 +29,7 @@ const LinkBox = styled.div`
 	padding-top: 15px;
 
 	a {
-		color: ${props => props.theme.primary};
+		color: ${props => props.theme.secondaryBg};
 	}
 `;
 
