@@ -40,7 +40,6 @@ export default class Sidebar extends Component {
 					</LiThemed>
 				</ul>
 				<Title>Nice Buttons</Title>
-				<Button>I'm Default Button</Button>
 				<Button style="primary" loading={loading} onClick={this.handleClick}>I'm Primary Button</Button>
 				<Button style="secondary" >I'm Secondary Button</Button>
 				<Button style="secondary" disabled={disabled}>I'm Disabled Button</Button>

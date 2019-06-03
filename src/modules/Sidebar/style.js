@@ -16,7 +16,7 @@ const LiThemed = styled.li`
 	}
 
 	a:hover {
-		color: ${props => props.theme.secondary};
+		color: ${props => props.theme.secondaryBg};
 	}
 
 `;

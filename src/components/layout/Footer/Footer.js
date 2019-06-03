@@ -1,20 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FooterThemed, } from './style';
 
-const Footer = ({ children, }) => {
+const Footer = () => {
 	return (
 		<FooterThemed>
-			{children}
+			<p>I'm a small footer &copy; 2019</p>
 		</FooterThemed>
 	)
 }
 
 export default Footer;
-
-Footer.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node
-	]).isRequired,
-}

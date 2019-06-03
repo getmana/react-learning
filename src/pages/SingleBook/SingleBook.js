@@ -17,40 +17,21 @@ import { PageTitle, Spinner, Button, Form, Field, Portal, } from '../../componen
 import { CenteredModal, DeleteBookModal, Input, Dropdown, } from '../../modules';
 import { PageThemed, FormBox, ButtonBox, portalInitStyle, } from './style';
 
-const mapStateToProps = (state) => {
-	const currentBook = state.books.currentBook;
-	let bookData = {};
-
-	if (currentBook && Object.keys(currentBook).length) {
-		bookData = {
-			title: currentBook.title,
-			author: currentBook.author,
-			country: currentBook.country,
-			year: currentBook.year,
-			language: currentBook.language,
-			link: currentBook.link,
-			pages: currentBook.pages,
-			rating: currentBook.rating,
-			imageLink: currentBook.imageLink,
-		}
-	}
-
-	return ({
-		currentBook: state.books.currentBook,
-		processing: state.books.processing,
-		initialValues: { ...bookData, },
-		language: bookData.language,
-		languages: state.books.languages,
-		ratings: state.books.ratings,
-		rating: bookData.rating,
-		title: bookData.title,
-		processingRatings: state.books.processingRatings,
-		processingLanguages: state.books.processingLanguages,
-		editingMode: state.books.editingMode,
-		modalMessage: state.books.modalMessage,
-		modalTitle: state.books.modalTitle,
-	})
-}
+const mapStateToProps = (state) => ({
+	currentBook: state.books.currentBook,
+	processing: state.books.processing,
+	initialValues: { ...state.books.currentBook, },
+	language: state.books.currentBook.language,
+	languages: state.books.languages,
+	ratings: state.books.ratings,
+	rating: state.books.currentBook.rating,
+	title: state.books.currentBook.title,
+	processingRatings: state.books.processingRatings,
+	processingLanguages: state.books.processingLanguages,
+	editingMode: state.books.editingMode,
+	modalMessage: state.books.modalMessage,
+	modalTitle: state.books.modalTitle,
+})
 
 const mapDispatchToProps = (dispatch) => ({
 	getCurrentBookStart: (id) => dispatch(getCurrentBookStart(id)),

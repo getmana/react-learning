@@ -1,15 +1,13 @@
 import React, { Component, } from 'react';
-import { Link, Route, Switch, withRouter, } from 'react-router-dom';
+import { withRouter, } from 'react-router-dom';
 import { connect, } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ThemeProvider, } from 'styled-components';
 import { closeMessageModal, } from '../../store/models/messageModal';
-import Logo from '../../assets/images/react-logo.png';
 import { themeIndigo, themeOrange, } from '../../configs/themes';
 import { Header, Footer, MainSection, Portal, } from '../../components';
-import { CenteredModal, MessageModal, SelectThemeModal, Sidebar, } from '../../modules';
-import { Account, HomePage, Login, Books, SingleBook, BuyBooks, } from '../../pages';
-import { Page, HeaderTitle, LogoImage, LinkBox, portalInitStyle, } from './style';
+import { CenteredModal, MessageModal, SelectThemeModal, Sidebar, ContentSwitch, } from '../../modules';
+import { Page, portalInitStyle, } from './style';
 
 const mapStateToProps = (state) => {
 	return ({
@@ -70,28 +68,12 @@ export default class App extends Component {
 		return (
 			<ThemeProvider theme={themeName}>
 				<Page>
-					<Header>
-						<Link to="/"><LogoImage src={Logo} /></Link>
-						<HeaderTitle>Hello from React</HeaderTitle>
-						<LinkBox>
-							<Link to="/login">login</Link>
-						</LinkBox>
-					</Header>
+					<Header />
 					<MainSection>
 						<Sidebar onOpenModal={this.openModal} />
-						<Switch>
-							<Route exact path="/" component={HomePage} />
-							<Route path="/login" component={Login} />
-							<Route path="/account" component={Account} />
-							<Route path="/search/:params" component={Books} />
-							<Route path="/books" component={Books} />
-							<Route path="/book/:id" component={SingleBook} />
-							<Route path="/buy-books" component={BuyBooks} />
-						</Switch>
+						<ContentSwitch />
 					</MainSection>
-					<Footer>
-						<p>I'm a small footer &copy; 2019</p>
-					</Footer>
+					<Footer />
 					{modalIsOpen && (
 						<Portal portalStyle={style} onClose={this.closeModal}>
 							<CenteredModal title="Select The Theme">
