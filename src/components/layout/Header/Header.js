@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, } from 'react-router-dom';
 import Logo from '../../../assets/images/react-logo.png';
-import ajLogo from '../../../assets/images/ajlogo1.png';
+import ajLogo from '../../../assets/images/ajlogo.png';
 import { HeaderThemed, HeaderTitle, LogoImage, LinkBox, LogoContainer, AJLogo, CenterContainer, } from './style';
 
 const Header = () => {
