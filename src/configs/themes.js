@@ -7,11 +7,13 @@ const themeIndigo = {
 };
 
 const themeOrange = {
-	primary: '#FF9800',
+	primary: '#201f1e',
 	secondary: '#CDDC39',
 	unactive: '#90A4AE',
 	bg: '#FFF3E0',
-	secondaryBg: '#CFD8DC',
+	secondaryBg: '#ffd51a',
 }
 
 export { themeIndigo, themeOrange };
+
+// #CFD8DC

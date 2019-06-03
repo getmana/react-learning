@@ -22,7 +22,7 @@ const PaginationBox = styled.div`
 	}
 
 	span.active {
-		color: ${props => props.theme.secondary};
+		color: ${props => props.theme.secondaryBg};
 		cursor: auto;
 		font-weight: 600;
 	}

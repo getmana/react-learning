@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 
 const HeaderThemed = styled.header`
-	color: #fff;
-	background-color: ${props => props.theme.primary};
-	justify-content: center;
-	padding: 5vh 0;
+	color: ${props => props.theme.primary};
+	background-color: ${props => props.theme.secondaryBg};
+	justify-content: space-between;
+	padding: 30px 20px;
 	display: flex;
 	position: relative;
+
+	@media screen and (max-width: 625px) {
+		flex-direction: column;
+		justify-content: center;
+	}
 `;
 
 const HeaderTitle = styled.h1`
@@ -21,19 +26,23 @@ const LogoImage = styled.img`
 `;
 
 const LinkBox = styled.div`
-	position: absolute;
-	padding: 15px 20px;
-	right: 0;
+	padding-top: 15px;
 
 	a {
-		color: #fff;
-	}
-
-	@media screen and (max-width: 480px) {
-		position: relative;
+		color: ${props => props.theme.primary};
 	}
 `;
 
+const LogoContainer = styled.div``;
+
+const CenterContainer = styled.div`
+	display: flex;
+`;
+
+const AJLogo = styled.img`
+	height: 50px;
+`;
+
 export {
-	HeaderThemed, HeaderTitle, LogoImage, LinkBox
+	HeaderThemed, HeaderTitle, LogoImage, LinkBox, LogoContainer, AJLogo, CenterContainer
 }
