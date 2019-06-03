@@ -10,10 +10,8 @@ const themeOrange = {
 	primary: '#201f1e',
 	secondary: '#CDDC39',
 	unactive: '#90A4AE',
-	bg: '#FFF3E0',
+	bg: '#FFF',
 	secondaryBg: '#ffd51a',
 }
 
 export { themeIndigo, themeOrange };
-
-// #CFD8DC
