@@ -12,7 +12,7 @@
 		"test": "clear && NODE_ENV=test jest || true"
 	},
 	"dependencies": {
-		"axios": "^0.18.0",
+		"axios": "^0.21.1",
 		"connected-react-router": "^4.4.1",
 		"fast-async": "^6.3.8",
 		"history": "^4.7.2",
