@@ -63,7 +63,7 @@
 		"eslint-plugin-jsx": "0.0.2",
 		"eslint-plugin-react": "^7.11.1",
 		"json-server": "^0.14.0",
-		"nanoid": "^1.3.1",
+		"nanoid": "^3.1.31",
 		"nodemon": "^1.18.4",
 		"parcel": "^1.10.1",
 		"redux-immutable-state-invariant": "^2.1.0"
